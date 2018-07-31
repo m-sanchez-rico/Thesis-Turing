@@ -1,0 +1,456 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=4cm,right=3cm,top= 4cm,bottom=3cm]{geometry}
+\usepackage{chngcntr}
+\counterwithout{equation}{chapter} % remove the chapter number
+
+\usepackage{graphicx}
+\graphicspath{}
+\usepackage{subfig}
+
+\date{16 Septiembre 2017}
+\author{Miguel Ignacio Sánchez Rico }
+\title{\textbf{Estimación de fuerzas de contacto para control de robots manipuladores}}
+
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\listoffigures
+\renewcommand{\bibname}{Referencias}
+
+
+\chapter{Introducción}
+
+Las lecturas realizadas para para documentar los siguientes capitulos se han extraido de~\cite{1} y~\cite{2}
+
+\section{Estudio previo, control de fuerzas en robots manipuladores}
+
+Hola, Hola, etc.
+
+\section{Métodos clásicos de control de interacción}
+
+Los métodos clásicos de control se pueden dividir en:
+
+\begin{itemize}
+	\item \textbf{Métodos pasivos:} Robot y el medio (se controlan y limitan las fuerzas en juego). 
+
+	\item \textbf{Métodos activos:} Robot al contactar con el medio.
+\end{itemize}
+
+Ambos métodos persiguen exactamente las mismas metas.
+
+
+\subsection{Métodos de Control Pasivos}
+
+Se suelen utilizar para obtener baja impedancia mecánica. 
+
+Con el uso de \textit{actuadores neumáticos}. 
+
+Los \textit{actuadores de serie elásticas}.
+
+Los actuadores mencionados anteriormente.
+
+\subsection{Métodos de control activos}
+
+Control directo y control indirecto. 
+
+Los métodos de \textit{control directo} requieren...
+
+Los conocidos como métodos de \textit{control indirectos,} se basan en...
+
+\chapter{Ejemplo de estimador de contacto}
+
+Después ponernos en situación, El articulo en el que esta basado el capitulo es~\cite{3}
+
+\section[Sensor dinámico de fuerzas con filtro de Kalman]{Sensor dinámico de fuerzas para robots manipuladores de alta velocidad utilizando un filtro de Kalman como técnicas de filtrado.}
+
+En este artículo se comenta un ejemplo de como se puede implementar...
+
+\subsection{Proceso de sensorizado de las fuerzas dinámicas.}
+
+El sensor de fuerza.
+
+	\begin{figure}[h!]
+		\caption{Fuerzas y momentos aplicados al efector final}
+		\includegraphics[scale=0.6]{sistemas_referencia.png}
+		\label{fig:1}
+		\centering
+	\end{figure}
+
+Velocidad como $\omega$, la masa como $m$, y el momento de inercia alrededor del centro de gravedad como $I$. Como se muestra en la Figura~\ref{fig:1},
+
+
+	\begin{equation}\label{eq:1}
+		m\ddot{p}=F_{s}+F_{a}+mg_{0}
+	\end{equation}
+
+	\begin{equation}\label{eq:2}
+		I\dot{\omega }+ \omega \times I\omega=N_{s}+r_{s} \times F_{s} + N_{a} + r_{a} \times F_{a}
+	\end{equation}
+
+donde $r_{s}$ y $r_{a}$ son los vectores de posición desde el centro de gravedad hasta los puntos de aplicación de las fuerzas y los momentos que se muestran en la figura ~\ref{fig:1}. 
+Para representar el sistema dinámico representado por (\ref{eq:1}) y (\ref{eq:2}) en la forma de espacio de estados, definimos el vector de estado del efector final como:
+
+	\begin{equation}\label{eq:3}
+		x_{z}=\left [ p^{T}\cdot \dot{p}^T\cdot o^T \omega^T  \right ]^T
+	\end{equation}
+
+donde representa los ángulos de orientación del efector final. $T$ en la parte superior derecha de cada vector representa la transposición del vector. Las entradas al sistema son los vectores definidos a continuación:
+
+	\begin{equation}\label{eq:4}
+		u_{s}=\left [ F_{s}^{T} N_{s}^{T} \right ]^T
+	\end{equation}
+
+	\begin{equation}\label{eq:5}
+		u_{a}=\left [ F_{a}^{T} N_{a}^{T} \right ]^T
+	\end{equation}
+
+Usando $x_{s}$, $u_{s}$, y $u_{a}$, obtenemos la ecuación de espacio de estado correspondiente a (\ref{eq:1}) y (\ref{eq:2}) como sigue: 
+
+	\begin{equation}\label{eq:6}
+		\dot{x}_{h}=A_{h}(x_{s})x_{h}+g_{h}+B_{h1}u_{s}+B_{h2}u_{a}+B_{h3}v_{h}
+	\end{equation}
+
+donde $A_{h} \in R^{12 \times 12}$, $B_{h1}$, $B_{h2}$ y $B_{h3} \in R^{12 \times 6}$, $g_{h} \in R^12$, y $v_{h} \in R^6$; $g_{h}$ consiste en $g_{0}$ y O'S, $v_{h}$ son las fuerzas desconocidas y los otros momentos $u_{s}$, y $u_{a}$, y $A_{h}$ ran en (\ref{eq:8}).
+
+	\begin{equation}\label{eq:7}
+		u_{s}=c_{s}x_{s}, \dot{x_{s}}=A_{s}x_{s}+B_{s}v_{s}
+	\end{equation}
+
+	\begin{equation}\label{eq:8}
+		u_{a}=c_{a}x_{a}, \dot{x_{a}}=A_{a}x_{a}+B_{a}v_{a}
+	\end{equation}
+
+Donde $x_{s} \in R^{n_{s}}$, $v_{s} \in R^{r_{s}}$, $A_{s} \in R^{n_{s} \times n_{s}}$, $B_{s} \in R^{n_{s} \times r_{s}}$, $C_{s} \in R^{6 \times n}$, $x_{a} \in R^{n_{a}}$, $v_{a} \in R^{r_{a}}$, $A_{a} \in R^{n_{a} \times n_{a}}$, $B_{a} \in R^{n_{a} \times r_{a}}$,y $C_{a} \in R^{6 \times n_{a}}$;
+
+
+Combinando (\ref{eq:6}) y (\ref{eq:8}) como sistemas extendidos:
+
+	\begin{equation}\label{eq:9}
+		\dot{x}=A(x)x+g+Bv
+	\end{equation}
+
+donde:
+
+	\begin{equation}\label{eq:10}
+		x=\left [ x_{h}^{T} x_{s}^{T} x_{a}^{T}\right ]^T
+	\end{equation}
+
+	\begin{equation}\label{eq:11}
+		v=\left [ v_{h}^{T} v_{s}^{T} v_{a}^{T}\right ]^T
+	\end{equation}
+
+
+	\begin{equation}\label{eq:12}
+		v=\left [ g_{h}^T O^{T}\right ]^T
+	\end{equation}
+
+	\begin{equation}\label{eq:13}
+		A=\begin{bmatrix}
+		A_{s} & B_{h1}C_{s} & B_{h2}C_{a}\\ 
+		 0 & A_{s} & 0 \\ 
+		 0 & 0 & A_{a}
+		\end{bmatrix}
+	\end{equation}
+
+	\begin{equation}\label{eq:14}
+		B=\begin{bmatrix}
+		B_{h3} & 0 & 0\\ 
+		 0 & B_{s} & 0 \\ 
+		 0 & 0 & B_{a}
+		\end{bmatrix}
+	\end{equation}
+
+Se observa que el sistema (\ref{eq:9})  $-u_{s}$, reaccionando a $u_{s}$. ión del sistema (\ref{eq:9}) está dado por:
+
+	\begin{equation}\label{eq:15}
+		y=\left [ p^T o^T -u_{s}^T\right ]^T
+	\end{equation}
+
+Por lo tanto, la ecuación de medición es:
+
+	\begin{equation}\label{eq:16}
+		y=Cx+\omega
+	\end{equation}
+
+Donde:
+
+	\begin{equation}\label{eq:17}
+		B=\begin{bmatrix}
+		 E & 0 & 0 & 0 & 0 & 0\\ 
+		 0 & 0 & E & 0 & 0 & 0 \\ 
+		 0 & 0 & 0 & 0 & -C & 0 \\ 
+		\end{bmatrix}
+	\end{equation}
+
+entonces, decimos que $\omega \in R^12$ es la medida de ruido el cual asumimos que es blanco, Gaussiano y de media cero. $E \in R^{3 \times 3}$ y es una matriz unidad.
+
+\subsection{Filtro de Kalman Extendido para estimar las fuerzas y momentos externos.}
+
+Puesto que las fuerzas finido por (\ref{eq:10}) como sigue:
+
+	\begin{equation}\label{eq:18}
+		u_{a}=\begin{bmatrix}
+		 0 & 0 & c_{a} 
+		\end{bmatrix}x_{1}
+	\end{equation}
+
+El problema de extraer $u_{a}$ de $y$ (el problema de la detección dinámica de la fuerza) (\ref{eq:9}) y (\ref{eq:16}).
+
+Supongamos que el sistema (\ref{eq:9}) y (\ref{eq:16}) hace que el movimiento sobre una trayectoria dada por:
+
+	\begin{equation}\label{eq:19}
+		\dot{\bar{x}}=A(\bar{x})\bar{x}+g+B\bar{v}
+	\end{equation}
+
+	\begin{equation}\label{eq:20}
+		\bar{y}=C\bar{x}
+	\end{equation}
+
+La expansión de Taylor del sistema alrededor de este movimiento produce las siguientes ecuaciones  lineales:
+
+	\begin{equation}\label{eq:21}
+		\delta \dot{x}=F \delta x+ B \delta v
+	\end{equation}
+
+
+	\begin{equation}\label{eq:22}
+		\delta y=C\delta x+\delta\omega
+	\end{equation}
+
+Donde F viene dado por:
+
+	\begin{equation}\label{eq:23}
+		F=\frac{\partial(Ax) }{\partial x}
+	\end{equation}
+
+Consideramos que $\delta v$ $\delta\omega$ son blancos Gaussianos y con cero de media.
+
+	\begin{equation}\label{eq:24}
+		\dot{\hat{x}}=A(\hat{x})\hat{x}+g+B\bar{x}+K(y-C\hat{x})
+	\end{equation}
+
+donde:
+
+	\begin{equation}\label{eq:25}
+		K=PC^TR^{-1}
+	\end{equation}
+
+	\begin{equation}\label{eq:26}
+		\dot{P}=FP+PF^T-PC^TR^{-1}CP+BQB^T
+	\end{equation}
+
+	\begin{equation}\label{eq:27}
+		Q=E \left[ \delta v \delta v^T \right]
+	\end{equation}
+
+	\begin{equation}\label{eq:28}
+		Q=E\left[ \delta \omega \delta \omega^T \right]
+	\end{equation}
+
+
+\subsection{Implementacion del Filtro de Kalman}
+
+La figura ~\ref{fig:2} muestra un diagrama de bloques de las ecuaciones derivadas anteriormente. El bloque encerrado por las líneas rectangulares, llamado procesador de señal dinámico, es el filtro extendido de Kalman que se implementará en un ordenador sera nuestro procesador de señales dinámicas.
+
+Las entradas del procesador de señal dinámica (filtro) son $\bar{x_{h}}$ , los ángulos de la articulaciones, y $-u_{s}$. A partir de $\bar{x_{h}}$, $\bar{x}$ se calculan $\bar{v}$. $F$ se calcula a partir de $\bar{x}$ y se utiliza en el cálculo de la ecuación de Riccati (\ref{eq:26}) para producir la ganancia de Kalman $K$. Los ángulos de las articulaciones se transforman a $p$ y $o$. Con $p$, y $o$ $-u_{s}$, se construye $y$. La sustitución de $y$, $\bar{v}$ y $K$ en (\ref{eq:24}) produce la estimación de $x$, a partir de la cual la estimación de $u_{a}$, se obtiene por (\ref{eq:18}).
+En la implementación anterior, $\bar{x_{h}}$, se utiliza para el cálculo de $v$ y $K$. Puesto que hay un término de realimentación en el filtro, $\bar{v}$ y $K$ no es necesario que sean muy precisos. Por lo tanto, podemos usar la trayectoria de referencia del movimiento del robot como $\bar{x_{h}}$. La trayectoria de referencia está normalmente contenida en el controlador y, por tanto, se obtiene fácilmente.
+
+
+	\begin{figure}[h]
+		\caption{Implementación del Filtro de Kalman Extendido}
+		\includegraphics{implementacion_kalman.png}
+		\centering
+		\label{fig:2}
+	\end{figure}
+
+\subsection{Linealización del Filtro}
+
+El filtro de Kalman extendido (\ref{eq:24}) no es lineal y requiere una gran cantidad de cálculo, particularmente, para el cálculo de la matriz de ganancia $K$. Por otra parte, si el sistema (\ref{eq:9}) y (\ref{eq:16}) es lineal,
+
+Dado que la no linealidad de (\ref{eq:9}) proviene de ....
+
+...anto $\delta v$ como $\delta\omega$ son sigue:
+
+	\begin{equation}\label{eq:29}
+		\dot{\hat{x}}=A\hat{x}+g+B\bar{x}+K_{?}(y-C\hat{x})
+	\end{equation}
+
+donde:
+	\begin{equation}\label{eq:30}
+		K_{\infty}=P_{\infty}C^{T}R^{-1}
+	\end{equation}
+
+	\begin{equation}\label{eq:31}
+		AP_{\infty}+P_{\infty}A^T-P_{\infty}C^{T}R^{-1}CP_{\infty}+BQB^{T}=0
+	\end{equation}
+
+
+\subsection{Experimentación y simulación}\label{sec:simulacion}
+
+La figura ~\ref{fig:3} muestra  
+
+	\begin{figure}[h]
+		\caption{Arquitectura del sistema experimental}
+		\includegraphics{sistema_experimental.png}
+		\label{fig:3}
+		\centering
+	\end{figure}
+
+El periodo de muestreo de del filtro es de 1ms. El filtro está ejecutado Off-line. Las condiciones para el experimento se resumen de la siguiente manera:
+
+	\begin{equation}\label{eq:32}
+		m=1.17\:kg
+	\end{equation}
+
+
+	\begin{equation}\label{eq:33}
+		I=diag[5.31 \times 10^{-4} kgm^2, 5.31 \times 10^{-4} kgm^2, 6.02 \times 10^{-4} kgm^2]
+	\end{equation}
+
+	\begin{equation}\label{eq:34}
+		A_{s}=-B{s}
+	\end{equation}
+
+	\begin{equation}\label{eq:35}
+		B_{s}=diag[2s^{-1}, 2s^{-1},2s^{-1},2s^{-1},2s^{-1},2s^{-1}] 
+	\end{equation}
+
+	\begin{equation}\label{eq:36}
+		A_{a}=-B{a}
+	\end{equation}
+
+	\begin{equation}\label{eq:37}
+		B_{a}=diag[4s^{-1}, 4s^{-1},4s^{-1},4s^{-1},4s^{-1},4s^{-1}] 
+	\end{equation}
+
+	\begin{equation}\label{eq:38}
+		\begin{split} 
+		Q=diag[0 N^2, 0 N^2, 0 N^2, 0 N^2m^2, 0 N^2m^2, 0 N^2m^2,\\
+		 10^2 N^2, 10^2 N^2, 10^2 N^2, 1 N^2m^2,\\ 
+		 1 N^2m^2, 1 N^2m^2, 10^5\:N^2, 10^5 N^2, 10^5 N^2,\\
+		  10^5 N^2m^2, 10^5 N^2m^2, 10^5 N^2m^2] 
+		\end{split}
+	\end{equation}
+
+	\begin{equation}\label{eq:39}
+		\begin{split}
+		R=diag[10^{-5} m^2, 10^{-5} m^2, 10^{-5} m^2,3 \times 10^{-3} rad^2, 3 \times 10^{-3}, 3 \times 10^{-3}\\
+		 10^{-2} N^2, 10^{-2} N^2, 5 \times 10^{-3} N^2\\ 
+		 10^{-5} N^2m^2, 10^{-5} N^2m^2, 10^{-5} N^2m^2]
+		\end{split}
+	\end{equation}
+
+En la figura ~\ref{fig:4} se muestran los resultados experimentales. Los autores nos muestran primero la trayectoria medida, la medidas de fuerzas y momentos, y por ultimo las fuerzas estimadas externas. $x$, $y$ y $z$ son los componentes de $p$, $\theta$, $\phi$ y $\phi$ son los componentes de $o$, $F_{sx}$, $F_{sy}$ y $F_{sz}$ son componentes de $N_{s}$, $\hat{F_{ax}}$ y $\hat{F_{ay}}$ y $\hat{F_{az}}$ son los componentes de $\hat{F_{a}}$ y $\hat{N_{ax}}$, $\hat{N_{ay}}$ y $\hat{N_{az}}$ son los componentes de $\hat{N_{a}}$. $\hat{F_{a}}$ y $\hat{N_{a}}$ son los valores estimados de ${F_{a}}$ y ${N_{az}}$ respectivamente.
+
+
+	\begin{figure}[h!]
+		\caption{Resultados del experimento básico}
+		\includegraphics[width=\textwidth]{resultados_experimento.png}
+		\label{fig:4}
+		\centering
+	\end{figure}
+
+En la figura ~\ref{fig:4} podemos en (figura ~\ref{fig:4} c), comparados en (figura ~\ref{fig:4} d)
+
+
+	\begin{figure}[h!]
+		\caption{Resultados de la simulación}
+		\includegraphics[width=\textwidth]{resultados_simulacion.png}
+		\label{fig:5}
+		\centering
+	\end{figure}
+
+
+\subsection{Sensor de fuerzas dinámicas aplicadas a tarea de manipulación}
+
+La figura ~\ref{fig:5} nos muestra 
+
+	\begin{equation}
+		m=2.80\:kg
+	\end{equation}
+
+	\begin{equation}
+		A_{s}=-B{s}
+	\end{equation}
+
+	\begin{equation}
+		B_{s}=diag[5s^{-1}, 5s^{-1},5s^{-1}] 
+	\end{equation}
+
+	\begin{equation}
+		A_{a}=-B{a}
+	\end{equation}
+
+	\begin{equation}
+		B_{a}=diag[2s^{-1}, 2s^{-1}, 2s^{-1}] 
+	\end{equation}
+
+	 \begin{equation}
+		\begin{split}
+		Q=diag[0 N^2, 0 N^2, 0 N^2, 10 N^2, 10 N^2, 10 N^2 \\ 10^{4} N^2, 10^{4} N^2, 10^{4} N^2]
+		\end{split}
+	\end{equation}
+
+	 \begin{equation}
+		\begin{split}
+		R=diag[10^{-6} m^2, 4 \times 10^{-6} m^2, 10^{-7} m^2, 0.1 N^2,\\ 0.1 N^2, 0 .3N^2]
+		\end{split}
+	\end{equation}
+
+	\begin{figure}[h!]
+		\caption{Detección de objeto}
+		\includegraphics{deteccion_objeto.png}
+		\centering
+	\end{figure}
+
+Se observa que las condiciones para este experimento y las del experimento en la Sección ~\ref{sec:simulacion} son diferentes. Sin embargo, no es un problema esencial porque, en primer lugar, los procesos de señal de $u$ y $u_{a}$ pueden ser asumidos arbitrariamente por un diseñador y, en segundo lugar, los ruidos de medición dependen de las condiciones del experimento.
+
+La Figura ~\ref{f:8}, ~\ref{f:9} y ~\ref{f:10}  muestran los resultados del experimento. Se pueden ver las trayectorias medidas, las fuerzas medidas y las fuerzas externas estimadas para detectar la colisión respectivamente. En las líneas verticales discontinuas, el efector final hizo colisión con el objeto. A partir de las señales raw del sensor de fuerza presentadas en la Figura ~\ref{f:9}, era imposible detectarlo cuando el efector final estaba en proceso de desaceleración antes de detener el movimiento. De las señales estimadas presentadas en la Figura ~\ref{f:10}, sin embargo, fue posible. La línea punteada horizontal en la figura inferior que muestra el valor absoluto del vector de fuerza externa estimado es el umbral para detectar la colisión. Con ese umbral relativamente bajo, la colisión fue detectada con éxito. Esto se debe al procesamiento dinámico de señales por el filtro presentado en este documento.
+
+
+\begin{figure}
+	 \centering
+	  \subfloat[Trayectoria]{
+	   \label{f:8}
+	    \includegraphics[width=0.3\textwidth]{trayectorias_medidas.png}}
+	  \subfloat[Medidas de Fuerza]{
+	   \label{f:9}
+	    \includegraphics[width=0.3\textwidth]{fuerzas_medidas.png}}
+	  \subfloat[Estimacion de fuerazas externas]{
+	   \label{f:10}
+	    \includegraphics[width=0.3\textwidth]{fuerzas_estimadas.png}}
+	 \caption{Aplicación real}
+	 \label{fig:deteccion}
+\end{figure}
+
+\subsection{Resumen}
+
+Con este articulo, nos muestran la implementación exitosa y un experimento para la detección de fuerzas dinámicas. Consiguen extraer las fuerzas y momentos externos, de las fuerzas y momentos medidos por un sensor de fuerza, situado en la muñeca del robot.
+
+Primero nos muestra la teoría completa para proporcionar experimentos básicos off-line y también para simulación. Los datos experimentales y de simulación muestran que la teoría funciona bien en la extracción de fuerzas y momentos externos. Después han aplicado la teoría a una tarea de manipulación real, que consiste en detectar un objeto situado a lo largo de una trayectoria planificada. La detección del objeto fue realizada por el sensor de fuerza que controlaba la colisión. Habitualmente se requiere de un movimiento lento del efector final, debido a las fuerzas inerciales y los momentos, pero en este caso se realizó con éxito incluso bajo el movimientos rápidos de la efector final.
+
+
+
+\begin{thebibliography}{9}
+
+	\bibitem{1}
+		\emph{UMH 2016}, Alumnos y profesores UMH, Libro Control Sensorial de Sistemas Robóticos (CSSR)
+
+	\bibitem{2}
+		\emph{Carlos Perez}, Apuntes Asignatura de Control Sensorial de Sistemas Robóticos. Master Robótica UMH 2017
+ 
+	\bibitem{3} 
+	\emph{Masaru Uchiyama and Kosei Kitagaki},Dynamic force sensing for high-speed robot manipulation.
+
+\end{thebibliography}
+
+\end{document}
+
