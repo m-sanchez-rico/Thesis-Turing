@@ -1,0 +1,45 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\author{Miguel Ignacio Sánchez }
+\title{\textbf{Anexos PROYECTO TURING}}
+
+
+\begin{document}
+%\maketitle
+
+\chapter*{Anexo I: Configurar Qtcreator}
+Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide de desarrollo para ROS.
+
+\begin{enumerate}
+
+
+\item Tenemos que abrir Qtcreator desde terminal, por que automáticamente carga el fichero $~/.bashrc$ el cual es el encargado de configurar el workspace de ROS.
+\item Una vez abierto el IDE de programación Qtcreator los siguiente es abrir el proyecto CMakelist de orden mas superior, es decir, $~/catkin_ws/src/CMakelist$. Este es el truco, este enlaza directamente con toda la instalación de ROS.
+\item Después de abrir el proyecto, configuramos el directorio build a \url{$catkin_ws/build/$} 
+\item en los argumentos de Cmake ponemos: $-DCMAKE_INSTALL_PREFIX=../install$ \\
+$-DCATKIN_DEVEL_PREFIX=../devel$ 
+\item Hacemos click derecho sobre el directorio del proyecto y hacemos run CMake.  
+
+\end{enumerate}
+Provamos $https://answers.ros.org/question/91516/qt-creator-281-ros-and-catkin-problems/$
+
+
+
+
+
+\chapter*{Anexo II: Configurar Qtcreator}
+
+
+
+
+
+
+\end{document}
