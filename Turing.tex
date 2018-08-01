@@ -13,23 +13,139 @@
 \graphicspath{}
 \usepackage{subfig}
 
-\date{16 Septiembre 2017}
-\author{Miguel Ignacio Sánchez Rico }
-\title{\textbf{Estimación de fuerzas de contacto para control de robots manipuladores}}
+%\date{16 Septiembre 2017}
+\author{Miguel Ignacio Sánchez }
+\title{\textbf{PROYECTO TURING}}
 
+%%%%%%%%%%%%%%%%%%%%
+\usepackage{color}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+\usepackage{listings}
+\lstset{ frame=Ltb,
+     framerule=0pt,
+     aboveskip=0.5cm,
+     framextopmargin=3pt,
+     framexbottommargin=3pt,
+     framexleftmargin=0.4cm,
+     framesep=0pt,
+     rulesep=.4pt,
+     backgroundcolor=\color{gray97},
+     rulesepcolor=\color{black},
+     %
+     stringstyle=\ttfamily,
+     showstringspaces = false,
+     basicstyle=\small\ttfamily,
+     commentstyle=\color{gray45},
+     keywordstyle=\bfseries,
+     %
+     numbers=left,
+     numbersep=15pt,
+     numberstyle=\tiny,
+     numberfirstline = false,
+     breaklines=true,
+   }
+ 
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+   {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+ 
+\lstdefinestyle{consola}
+   {basicstyle=\scriptsize\bf\ttfamily,
+    backgroundcolor=\color{gray75},
+   }
+ 
+\lstdefinestyle{C}
+   {language=C,
+   }
+
+%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
 \maketitle
+
+\chapter*{}
+\begin{center}
+\textit{"Sometimes it is the people no one imagines anything of who do the things that no-one can imagine." \\
+-Alan Turing-}
+\end{center}
+
 \tableofcontents
 \listoffigures
+
 \renewcommand{\bibname}{Referencias}
 
 
 \chapter{Introducción}
 
-Esto es una prueba haber si .git ignore elimina no hace el commit de la carpeta buit Las lecturas realizadas para para documentar los siguientes capitulos se han extraido de~\cite{1} y~\cite{2}
+\section{Motivación}
+La motivación por acometer este Proyecto viene de mi propio interés por conocer el funcionamiento de los Robots basados en ROS. Hoy en día es una rama de la robótica que esta creciendo muy rápido, Además creo que la demanda de profesionales formados con conocimientos en este software para robots va a aumentar en los próximos años. Mi interés viene de mi proyecto de final de grado donde realice el proyecto con Titulo: ----------------- donde mis tareas eran de conocimiento, análisis del funcionamiento de las tareas de navegación y visión por computados. Para poner en practica los conocimientos adquiridos el objetivo final fue realizar una aplicación donde nuestro robot navegara de forma autónoma reproduciendo presentaciones y dialogo, también realizamos una pequeña interfaz para la pantalla situada en el pecho del Robot donde los usuarios pudiera interactuar con el Robot.
 
+Una vez conocidas las funciones en alto nivel de este SO para Robots mi intención es profundizar en el funcionamiento en bajo nivel conociendo como se programan y como interactúan todos los componentes como son motores, sensores, cámaras, micrófonos, etc.
+
+El nombre del proyecto viene inspirado en el apellido del primer creador de inteligencia artificial, su bibliografía cuenta que fue creo una maquina capaz de descifrar los mensajes de radio que los alemanes enviaban a sus tropas, ayudando a si a ganar la guerra anticipándose a los movimientos de las tropas enemigas. Mi motivación viene de un hombre que siempre creyó que podía construir un computador pese a que nadie confiara en su funcionamiento.
+
+% dejo ejemplo de citas
+ de~\cite{1} y~\cite{2}
+
+\section{Materiales}
+\subsection{Ordenadores}
+A continuación vamos a documentar un poco los materiales necesarios para realizar nuestro proyecto Turing. A más alto nivel los equipos que vamos a utilizar son los siguientes:
+
+	\begin{enumerate}
+	\item[1] Ordenador de sobremesa que llamamos \textbf{ordenador de desarrollo}. Las características son las siguientes: Intel quad core, 6 G de RAM, 			Gráfica Nvidia G210 1G. Los detalles importante que debemos de conocer es que la grafica, tiene que ser Nvidia y asegurarnos de que los drives estar 			disponibles para Ubuntu. 
+	\item[2] \textbf{Ordenador compacto} que va a ser el cerebro de nuestro Robot. Netbook Acer Aspire One 532h, caracteristicas: Intel atom, 2 G de RAM. Lo importante a conocer de este pc es que mínimo necesitamos 2G de RAM, por que son los requisitos mínimos para poder instalar Ubuntu 64 bits.
+	\item[3] \textbf{Router}. Necesitamos crear una red Wifi para realizar la comunicación entre nuestro ordenadores.
+	\end{enumerate}
+
+El SO que vamos a utilizar es Ubuntu 14.04 LTS de 64 bits. Además el vamos a instalar el software que nos permite dotar de inteligencia a nuestro robot, ROS (Robot Operative System), la versión Indigo. El motivo de utilizar esta version nos vienen impuesto por que disponemos de mas la cantidad de información. 
+
+\subsection{Componentes electrónicos}
+	\begin{itemize}
+	\item Acelerómetro triple Eje MPU-6050
+	\item Sensores Ultrasonido HC-SR04
+	\item Motor Driver Dual VNH2SP30 POLC-708
+	\item 131:1 Gear Motor 64 CPR ENcoder POLC-2827
+	\item Ruedas $\oslash$90mm  
+	\item Tiva C Launchpad 32 bits ARM Cortex-M4
+	\item Microsoft Kinect v1
+	\item Bateria 12 9Ah Li-Polimer
+	\item Conversor lógico
+	\item Rueda Castor
+	\end{itemize}
+
+\subsection{Estructura del Robot}
+La primera estructura del robot la vamos a hacer con madera, se base en tres platos de 30 cm de di?metro. Para conectar los platos utilizamos varilla de madera y las anclamos a los platos con tonillos.
+
+\textbf{ADJUNTAMOS FOTOS EN AUTOCAD DE LAS MADERAS REALIZADAS}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage\null\newpage
+%%%% FICHERO ANTERIOR %%%%%%%
 \section{Estudio previo, control de fuerzas en robots manipuladores}
 
 Hola, Hola, etc.
