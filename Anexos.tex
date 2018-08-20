@@ -15,28 +15,49 @@
 \begin{document}
 %\maketitle
 
-\chapter*{Anexo I: Configurar Qtcreator}
-Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide de desarrollo para ROS.
+\chapter*{Anexo I: Comandos Git para manejar repositorios.}
+A continuación vamos a listar los comando que utilizamos en el terminal de Ubuntu para manejar los repositorios de nuestro proyecto.
 
-\begin{enumerate}
-
-
-\item Tenemos que abrir Qtcreator desde terminal, por que automáticamente carga el fichero $~/.bashrc$ el cual es el encargado de configurar el workspace de ROS.
-\item Una vez abierto el IDE de programación Qtcreator los siguiente es abrir el proyecto CMakelist de orden mas superior, es decir, $~/catkin_ws/src/CMakelist$. Este es el truco, este enlaza directamente con toda la instalación de ROS.
-\item Después de abrir el proyecto, configuramos el directorio build a \url{$catkin_ws/build/$} 
-\item en los argumentos de Cmake ponemos: $-DCMAKE_INSTALL_PREFIX=../install$ \\
-$-DCATKIN_DEVEL_PREFIX=../devel$ 
-\item Hacemos click derecho sobre el directorio del proyecto y hacemos run CMake.  
-
-\end{enumerate}
-Provamos $https://answers.ros.org/question/91516/qt-creator-281-ros-and-catkin-problems/$
-
-
-
+ \begin{itemize}
+ \item \textbf{status}: Para listar los ficheros que hemos modificado y cuales están pendientes de commit o add.
+ \item \textbf{add}: Para añadir ficheros nuevos al repositorio. (Ej: git add sample.cpp).
+ \item \textbf{rm}: Para borrar ficheros del repositorio remoto. (Ej: git rm sample.cpp).
+ \item \textbf{commit}: Para indicarle al repositorio que es lo nuevo que queremos subir o guardar. (Ej. git commit -m $"some message"$).
+ \item \textbf{push}: Se hace para empujar o subir nuestros cambios al repositorio remoto. Tenemos que indicarle a que rama queremos subir nuestro repositorio. (Ej. git push origin master).
+ \item \textbf{pull}: Coger descargar los cambios del repositorio remoto.(Ej. git pull).
+ \item \textbf{diff}: Para pre-visualizar cambios entre el repositorio y nuestra copia local.(Ej. git diff).
+ \item \textbf{init}: Para crear nuevos repositorios locales. (Ej. git init).
+ \item \textbf{clone}: Para hacer clonar repositorios. se pueden hacer copias de nuestro repositorio local en otra carpeta local (Ej. git clone /path...). También se pueden clonar repositorios remotos (Ej. git clone username@host:path/to/repository).
+ \item \textbf{help}: Para obtener ayuda sobre los comandos de git. (Ej: git help).
+ 
+  
+ 
+ \end{itemize}
 
 
 \chapter*{Anexo II: Configurar Qtcreator}
+Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide de desarrollo para ROS.
 
+	\begin{enumerate}
+	\item Tenemos que abrir Qtcreator desde terminal, por que automáticamente carga el fichero $~/.bashrc$ el cual es el encargado de configurar el workspace 		de ROS.
+	\item Una vez abierto el IDE de programación Qtcreator los siguiente es abrir el proyecto CMakelist de orden mas superior, es decir, 								$~/catkin_ws/src/CMakelist$. Este es el truco, este enlaza directamente con toda la instalación de ROS.
+	\item Después de abrir el proyecto, configuramos el directorio build a \url{$catkin_ws/build/$} 
+	\item en los argumentos de Cmake ponemos: $-DCMAKE_INSTALL_PREFIX=../install$ \\
+	$-DCATKIN_DEVEL_PREFIX=../devel$ 
+	\item Hacemos click derecho sobre el directorio del proyecto y hacemos run CMake.  
+	\end{enumerate}
+
+Provamos $https://answers.ros.org/question/91516/qt-creator-281-ros-and-catkin-problems/$
+
+
+\chapter*{Anexo III: Comandos utilies}
+
+En este anexo vamos a ir listando los diferentes comandos que nos pueden ser utilies para Ubuntu, ROS, etc.
+
+\begin{itemize}
+	\item Buscas paquetes disponibles en ROS: sudo apt-cache search ros-indigo $\mid$ grep opencv
+
+	\end{itemize} 
 
 
 

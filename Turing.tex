@@ -82,22 +82,19 @@
 \chapter{Introducción}
 
 \section{Motivación}
-La motivación por acometer este Proyecto viene de mi propio interés por conocer el funcionamiento de los Robots basados en ROS. Hoy en día es una rama de la robótica que esta creciendo muy rápido, Además creo que la demanda de profesionales formados con conocimientos en este software para robots va a aumentar en los próximos años. Mi interés viene de mi proyecto de final de grado donde realice el proyecto con Titulo: ----------------- donde mis tareas eran de conocimiento, análisis del funcionamiento de las tareas de navegación y visión por computados. Para poner en practica los conocimientos adquiridos el objetivo final fue realizar una aplicación donde nuestro robot navegara de forma autónoma reproduciendo presentaciones y dialogo, también realizamos una pequeña interfaz para la pantalla situada en el pecho del Robot donde los usuarios pudiera interactuar con el Robot.
+La motivación por acometer este Proyecto viene de mi propio interés por conocer el funcionamiento de los Robots basados en ROS. Hoy en día es una rama de la robótica que esta creciendo muy rápido, Además creo que la demanda de profesionales formados con conocimientos en este software para robots va a aumentar en los próximos años. Mi interés viene de mi proyecto de final de grado donde realice el proyecto con Titulo: ----------------- donde mis tareas eran el aprendizaje, análisis del funcionamiento de las tareas de navegación y visión por computador. Para poner en practica los conocimientos adquiridos el objetivo final fue realizar una aplicación donde nuestro robot navegara de forma autónoma reproduciendo presentaciones y diálogos, también realizamos una pequeña interfaz para la pantalla situada en el pecho del Robot donde los usuarios pudiera interactuar con el Robot.
 
-Una vez conocidas las funciones en alto nivel de este SO para Robots mi intención es profundizar en el funcionamiento en bajo nivel conociendo como se programan y como interactúan todos los componentes como son motores, sensores, cámaras, micrófonos, etc.
+Una vez conocidas las funciones en alto nivel de este SO para Robots mi intención es profundizar en el funcionamiento en bajo nivel conociendo como se programan y como se comunican todos los componentes como son motores, sensores, cámaras, micrófonos, etc.
 
 El nombre del proyecto viene inspirado en el apellido del primer creador de inteligencia artificial, su bibliografía cuenta que fue creo una maquina capaz de descifrar los mensajes de radio que los alemanes enviaban a sus tropas, ayudando a si a ganar la guerra anticipándose a los movimientos de las tropas enemigas. Mi motivación viene de un hombre que siempre creyó que podía construir un computador pese a que nadie confiara en su funcionamiento.
-
-% dejo ejemplo de citas
- de~\cite{1} y~\cite{2}
 
 \section{Materiales}
 \subsection{Ordenadores}
 A continuación vamos a documentar un poco los materiales necesarios para realizar nuestro proyecto Turing. A más alto nivel los equipos que vamos a utilizar son los siguientes:
 
 	\begin{enumerate}
-	\item[1] Ordenador de sobremesa que llamamos \textbf{ordenador de desarrollo}. Las características son las siguientes: Intel quad core, 6 G de RAM, 			Gráfica Nvidia G210 1G. Los detalles importante que debemos de conocer es que la grafica, tiene que ser Nvidia y asegurarnos de que los drives estar 			disponibles para Ubuntu. 
-	\item[2] \textbf{Ordenador compacto} que va a ser el cerebro de nuestro Robot. Netbook Acer Aspire One 532h, caracteristicas: Intel atom, 2 G de RAM. Lo importante a conocer de este pc es que mínimo necesitamos 2G de RAM, por que son los requisitos mínimos para poder instalar Ubuntu 64 bits.
+	\item[1] Ordenador de sobremesa que llamamos \textbf{ordenador de desarrollo}. Las características son las siguientes: Intel quad core, 6 G de RAM, 			Gráfica Nvidia G210 1G. Los detalles importante que debemos de conocer es que la gráfica, tiene que ser Nvidia y asegurarnos de que los drives estar 			disponibles para Ubuntu. 
+	\item[2] \textbf{Ordenador compacto} que va a ser el cerebro de nuestro Robot. Netbook Acer Aspire One 532h, caracteristicas: Intel atom, 2 G de RAM. Lo importante a conocer de este pc es que mínimo necesitamos 2G de RAM, por que son los requisitos mínimos para poder instalar Ubuntu 64 bits. Es conveniente que los equipos utilicen las mismas vesiones del SO Ubuntu.
 	\item[3] \textbf{Router}. Necesitamos crear una red Wifi para realizar la comunicación entre nuestro ordenadores.
 	\end{enumerate}
 
@@ -105,10 +102,10 @@ El SO que vamos a utilizar es Ubuntu 14.04 LTS de 64 bits. Además el vamos a ins
 
 \subsection{Componentes electrónicos}
 	\begin{itemize}
-	\item Acelerómetro triple Eje MPU-6050
+	\item Aceleró-metro triple Eje MPU-6050
 	\item Sensores Ultrasonido HC-SR04
 	\item Motor Driver Dual VNH2SP30 POLC-708
-	\item 131:1 Gear Motor 64 CPR ENcoder POLC-2827
+	\item 131:1 Gear Motor 64 CPR Encoder POLC-2827
 	\item Ruedas $\oslash$90mm  
 	\item Tiva C Launchpad 32 bits ARM Cortex-M4
 	\item Microsoft Kinect v1
@@ -117,16 +114,32 @@ El SO que vamos a utilizar es Ubuntu 14.04 LTS de 64 bits. Además el vamos a ins
 	\item Rueda Castor
 	\end{itemize}
 
-\subsection{Estructura del Robot}
-La primera estructura del robot la vamos a hacer con madera, se base en tres platos de 30 cm de di?metro. Para conectar los platos utilizamos varilla de madera y las anclamos a los platos con tonillos.
+\subsection{Estructura del Robot.}
+La primera estructura del robot la vamos a hacer con madera, se base en tres platos de 30 cm de diámetro. Para conectar los platos utilizamos varilla de madera y las anclamos a los platos con tonillos.
 
-\textbf{ADJUNTAMOS FOTOS EN AUTOCAD DE LAS MADERAS REALIZADAS}
-
-
+\textbf{ADJUNTAMOS IMAGENES EN CAD DE LA ESTRUCTURA REALIZADAS}
 
 
+\section{Tests preliminares.}
+Lo primero de todo necesario para acometer el proyecto es instalar ROS, damos por hecho que podemos hacerlo, existen millones de tutoriales y libros que nos pueden ayudar con esto.
 
+A continuación vamos a probar los componentes de forma individual antes del robot. Con la corta experiencia que tengo, se que muchas ROS y entre muchos de los paquetes que son libres, existen muchas fuentes de error o de posibles faltas de software compatible etc. Por lo tanto, considero que es muy importante partir de todos los elementos probados y habiendo realizado algún pequeño test o aplicación. De esta forma nos aseguraremos que tenemos todo el software necesario y si no, pelearemos con problemas un poco mas acotados.
 
+\subsection{Microsoft Kinect v1.}
+El robot que vamos a crear tienen un sensor 3D, la Kinect de Microsoft. Este sensor nos da la posibilidad de trabajar con librerías de Visión Artificial como son OpenCV, OpenNI, y Point Cloud Library (PCL). Estas librerias las utilizaremos para conceder a nuestro robot la abilidad de navegar de forma autonoma, ser capaz de evitar obstaculos detectar personas o hacer trackind de las diferentes usuarios.
+
+Instalación de software:
+	\begin{itemize}
+	\item OpenCV: Teoricamente este paquete se instala por defecto cuando instalamos \textsf{ros-indigo-desktop-full}. De todas maneras con el siguiente comando podemos asegurarnos de tenerlo perfectamente instalado \textsf{sudo apt-get install ros-indigo-vision-opencv}. Si solo queremos instalar los envoltorios o la posiblidad de usar python tecleamos \textsf{sudo apt-get install python-opnecv}.
+	
+	El libro nos da la posibilidad de instalarlos desde los ficheros fuente en Ubuntu, pero lo primero que voy a probar es si podemos ejecutar algún ejemplo con la instalación de OpenCV que tenemos.
+	
+	\subsubsection{OpenCV: Leer y mostrar imágenes}
+	
+	 
+	
+
+	\end{itemize}
 
 
 
@@ -184,6 +197,8 @@ Los conocidos como métodos de \textit{control indirectos,} se basan en...
 \chapter{Ejemplo de estimador de contacto}
 
 Después ponernos en situación, El articulo en el que esta basado el capitulo es~\cite{3}
+% dejo ejemplo de citas
+ de~\cite{1} y~\cite{2}
 
 \section[Sensor dinámico de fuerzas con filtro de Kalman]{Sensor dinámico de fuerzas para robots manipuladores de alta velocidad utilizando un filtro de Kalman como técnicas de filtrado.}
 
