@@ -133,17 +133,59 @@ Instalación de software:
 	\item OpenCV: Teoricamente este paquete se instala por defecto cuando instalamos \textsf{ros-indigo-desktop-full}. De todas maneras con el siguiente comando podemos asegurarnos de tenerlo perfectamente instalado \textsf{sudo apt-get install ros-indigo-vision-opencv}. Si solo queremos instalar los envoltorios o la posiblidad de usar python tecleamos \textsf{sudo apt-get install python-opnecv}.
 	
 	El libro nos da la posibilidad de instalarlos desde los ficheros fuente en Ubuntu, pero lo primero que voy a probar es si podemos ejecutar algún ejemplo con la instalación de OpenCV que tenemos.
-	
-	\subsubsection{OpenCV: Leer y mostrar imágenes}
-	
-	 
-	
-
 	\end{itemize}
+	
+	
+	\subsubsection{OpenCV: Leer y mostrar imágenes}	
+	Mostrat imagen del robot, la imagen tiene que estar en la misma carpeta que el codigo.
+
+\begin{lstlisting}[style=C]
+#!/usr/bin/env python
+import numpy as np
+import cv2
+
+img = cv2.imread("robot.png",0)
+cv2.imshow('image',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()		
+\end{lstlisting}
+		
+\noindent
+Ahora ejecutamos con:
+		
+\begin{listing}[style=consola, numbers=none]
+python img_read.py
+\end{listing}
+
+Capturamos imagenes de la camara y la mostramos, finaliza cuando presionemos una tecla.
+
+\begin{lstlisting}[style=C]
+#!/usr/bin/env python
+import numpy as np
+import cv2
+cap = cv2.VideoCapture(0)
+while(True):
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    # Display the resulting frame
+    cv2.imshow('frame',frame)
+    if cv2.waitKey(10):
+        break
+# When everything done, release the capture
+cap.release()
+cv2.destroyAllWindows()	
+\end{lstlisting}
+
+\noindent
+Ahora ejecutamos con:
+		
+\begin{listing}[style=consola, numbers=none]
+python img_read.py
+\end{listing}
 
 
 
-
+\subsubsection{OpenNi: }
 
 
 

@@ -8,6 +8,53 @@
 \usepackage{hyperref}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
+%%%%%%%%%%%%%%%%%%%% CONFIG COLORES LINEA COMANDOS
+\usepackage{color}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+\usepackage{listings}
+\lstset{ frame=Ltb,
+     framerule=0pt,
+     aboveskip=0.5cm,
+     framextopmargin=3pt,
+     framexbottommargin=3pt,
+     framexleftmargin=0.4cm,
+     framesep=0pt,
+     rulesep=.4pt,
+     backgroundcolor=\color{gray97},
+     rulesepcolor=\color{black},
+     %
+     stringstyle=\ttfamily,
+     showstringspaces = false,
+     basicstyle=\small\ttfamily,
+     commentstyle=\color{gray45},
+     keywordstyle=\bfseries,
+     %
+     numbers=left,
+     numbersep=15pt,
+     numberstyle=\tiny,
+     numberfirstline = false,
+     breaklines=true,
+   }
+
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+   {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+ 
+\lstdefinestyle{consola}
+   {basicstyle=\scriptsize\bf\ttfamily,
+    backgroundcolor=\color{gray75},
+   }
+ 
+\lstdefinestyle{C}
+   {language=C,
+   }
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
 \author{Miguel Ignacio Sánchez }
 \title{\textbf{Anexos PROYECTO TURING}}
 
@@ -29,13 +76,64 @@ A continuación vamos a listar los comando que utilizamos en el terminal de Ubunt
  \item \textbf{init}: Para crear nuevos repositorios locales. (Ej. git init).
  \item \textbf{clone}: Para hacer clonar repositorios. se pueden hacer copias de nuestro repositorio local en otra carpeta local (Ej. git clone /path...). También se pueden clonar repositorios remotos (Ej. git clone username@host:path/to/repository).
  \item \textbf{help}: Para obtener ayuda sobre los comandos de git. (Ej: git help).
- 
-  
- 
  \end{itemize}
 
+\chapter*{Anexo II: ROS crear workspace y paquetes.}
+\section{Workspace}
+Para crear el workspace, tenemos que seguir los siguientes pasos:
 
-\chapter*{Anexo II: Configurar Qtcreator}
+\begin{listing}[style=consola, numbers=none]
+ \$ mkdir -p ~/catkin_ws/src*)
+ \$ cd ~/catkin_ws/
+ \$ catkin_make 
+\end{listing}
+
+Para cargar nuestro workspace y ponerlo al principio del path de ROS, con lo que conseguimos que ante dos paquetes con el mismo nombre se coja la que primero esta en el path).
+
+\begin{listing}[style=consola, numbers=none]
+source devel/setup.bash
+\end{listing}
+
+Comprobamos ROS PATH con:
+ 
+\begin{listing}[style=consola, numbers=none]
+echo \$ROS_PACKAGE_PATH
+\end{listing}
+
+\section{Python package}
+Para crear paquetes no importa el lenguaje que estamos utilizando, solo tenemos que tener en cuenta que debemos de añadirlo a las dependencias, el modelo para crear paquetes es el siguiente:
+
+\begin{listing}[style=consola, numbers=none]
+# This is an example, do not try to run this
+# catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
+\end{listing}
+
+A continuación mostramos un ejemplo.
+\begin{listing}[style=consola, numbers=none]
+\$ catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+\end{listing}
+
+
+
+\chapter*{Anexo III: Comandos utilies}
+
+En este anexo vamos a ir listando los diferentes comandos que nos pueden ser utilies para Ubuntu, ROS, etc.
+
+\begin{itemize}
+	
+	\item Buscas paquetes disponibles en ROS: 
+\begin{listing}[style=consola, numbers=none]
+ sudo apt-cache search ros-indigo | grep opencv
+\end{listing}
+	
+	
+
+	\end{itemize} 
+
+
+
+
+\chapter*{Anexo IV: Configurar Qtcreator}
 Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide de desarrollo para ROS.
 
 	\begin{enumerate}
@@ -49,15 +147,6 @@ Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide d
 
 Provamos $https://answers.ros.org/question/91516/qt-creator-281-ros-and-catkin-problems/$
 
-
-\chapter*{Anexo III: Comandos utilies}
-
-En este anexo vamos a ir listando los diferentes comandos que nos pueden ser utilies para Ubuntu, ROS, etc.
-
-\begin{itemize}
-	\item Buscas paquetes disponibles en ROS: sudo apt-cache search ros-indigo $\mid$ grep opencv
-
-	\end{itemize} 
 
 
 
