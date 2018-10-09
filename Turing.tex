@@ -13,6 +13,8 @@
 \graphicspath{}
 \usepackage{subfig}
 
+\usepackage{hyperref}
+
 %\date{16 Septiembre 2017}
 \author{Miguel Ignacio Sánchez }
 \title{\textbf{PROYECTO TURING}}
@@ -186,6 +188,33 @@ python img_read.py
 
 
 \subsubsection{OpenNi: }
+
+Openni es un framework que nos define API's para escribir y utilizar Natural Interaction (NI). Estos nos permite comunicarnos a traves de gestos, expresiones, movimientos y descubrir el musndo mirando alreddor y manipulando elementos fisicos.
+
+Lo que necesitamos para intalarlo en ubuntu es el paquete:
+
+\begin{listing}[style=consola, numbers=none]
+sudo apt-get install ros-indigo-openni-launch
+\end{listing}
+
+Para poder utilizar estos ejemplos tenemos que asegurarnos de que la Kinect esta funcionando. Las pruebas que yo he realizado es asegurarme de que  freenect esta instalado. 
+
+Lo que tenemos que hacer es conocer si nuestro SO detencta la kinect. solo tenemos que hacer el siguiente comando en un termial 
+
+\begin{listing}[style=consola, numbers=none]
+lsusb
+\end{listing}
+
+El terminar deberia de darnos un autput como el que se muestra en la siguiente imagen:
+
+\begin{figure}[h!]
+		\caption{SO detecta la Kinect}
+		\includegraphics[width=\textwidth]{imagenes/lsusb.png}
+		\label{fig:4}
+		\centering
+\end{figure}
+
+Lo que he realizado es bajarme el repositorio con el stack de freenect y compilarlo desde mi workspace. A continuacion adjunto la dirección del repositorio \url{https://github.com/ros-drivers/freenect_stack.git}. Solo tendriamos que hacer el git clone en la carpeta donde queremos guardarlo. Antes de arrancar ningun programa de la kinect. Hacemos un lsusb y deberia de aparecer una imagen como la siguiente.
 
 
 
