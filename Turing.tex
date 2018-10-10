@@ -130,15 +130,75 @@ A continuación vamos a probar los componentes de forma individual antes del robo
 \subsection{Microsoft Kinect v1.}
 El robot que vamos a crear tienen un sensor 3D, la Kinect de Microsoft. Este sensor nos da la posibilidad de trabajar con librerías de Visión Artificial como son OpenCV, OpenNI, y Point Cloud Library (PCL). Estas librerias las utilizaremos para conceder a nuestro robot la abilidad de navegar de forma autonoma, ser capaz de evitar obstaculos detectar personas o hacer trackind de las diferentes usuarios.
 
-Instalación de software:
-	\begin{itemize}
-	\item OpenCV: Teoricamente este paquete se instala por defecto cuando instalamos \textsf{ros-indigo-desktop-full}. De todas maneras con el siguiente comando podemos asegurarnos de tenerlo perfectamente instalado \textsf{sudo apt-get install ros-indigo-vision-opencv}. Si solo queremos instalar los envoltorios o la posiblidad de usar python tecleamos \textsf{sudo apt-get install python-opnecv}.
+Para poder utilizar estos ejemplos tenemos que asegurarnos de que la Kinect esta funcionando. Lo primero que tenemos que hacer es conocer si nuestro SO detencta la kinect,ejecutamos el siguiente comando en un termial: 
+
+\begin{listing}[style=consola, numbers=none]
+lsusb
+\end{listing}
+
+El terminar deberia de darnos un output como el que se muestra en la siguiente imagen:
+
+\begin{figure}[h!]
+		\caption{SO detecta la Kinect}
+		\includegraphics[width=\textwidth]{imagenes/lsusb.png}
+		\label{fig:4}
+		\centering
+\end{figure}
+
+A continuacion vamos a descargar el stack donde estan todos los driver, vamos a la carpeta catkin\_ws/src. Y ejecutamos el siguiente comando:
+
+\begin{listing}[style=consola, numbers=none]
+cd ~/catkin_ws/src
+git clone https://github.com/ros-drivers/freenect_stack.git
+\end{listing}
+
+A continuacion hacemos hacemos catkin\_make. Dejamos que compile y ya tendriamos todos los ficheros necesarios para probar nuestra Kinect.
+
+Voy a mostrar el proceso con el cual podemos comprobar que nuestra Kinect esta funcionando y es detenctada por el SO.
+
+Arrancamos el fichero launch dentro del paquete freenect\_launch que esta en nuestro workspace y acabamos de compilar. Utilizamos en siguiente comando:
+
+\begin{listing}[style=consola, numbers=none]
+roslaunch freenect_launch freenect.launch
+\end{listing}
+
+Y acontinuacion vamos a arrancar un nodo image\_view y le decimos como argumento a que topic se tiene que conectar:
+
+\begin{listing}[style=consola, numbers=none]
+rosrun image_view image_view image:=/camera/rgb/image_color 
+rosrun image_view image_view image:=/camera/depth/image_rect
+\end{listing}
+
+A continuacion vermos como se abre un a ventana y aprecen las imagenes capturadas por la Kinect:
+
+\begin{figure}[h!]
+		\caption{Imagenes capturadas por Kinect}
+		\includegraphics[width=\textwidth]{imagenes/kinect_test1.png}
+		\label{fig:5}
+		\centering
+\end{figure}
+
+Una vez sabemos seguro que nuestra rensor RGBD esta funcionando. Sigamos con el software adicional que necesitamos.
+
+
+\subsection{OpenCV.}
+ Teoricamente este paquete se instala por defecto cuando instalamos \textsf{ros-indigo-desktop-full}. De todas maneras con el siguiente comando podemos asegurarnos de tenerlo perfectamente instalado: 
+
+\begin{listing}[style=consola, numbers=none]
+sudo apt-get install ros-indigo-vision-opencv
+\end{listing}
+
+Si solo queremos instalar los envoltorios o la posiblidad de usar python tecleamos:
+\begin{listing}[style=consola, numbers=none]
+sudo apt-get install python-opnecv
+\end{listing}
 	
 	El libro nos da la posibilidad de instalarlos desde los ficheros fuente en Ubuntu, pero lo primero que voy a probar es si podemos ejecutar algún ejemplo con la instalación de OpenCV que tenemos.
-	\end{itemize}
+	
+	Los ejemplos que vamos a mostrar de OpenCV, los hemos testeado con una web cam corriente (Genius Eye 320).
 	
 	
-	\subsubsection{OpenCV: Leer y mostrar imágenes}	
+	\subsubsection{OpenCV: Leer .png y mostrar}	
 	Mostrat imagen del robot, la imagen tiene que estar en la misma carpeta que el codigo.
 
 \begin{lstlisting}[style=C]
@@ -159,35 +219,79 @@ Ahora ejecutamos con:
 python img_read.py
 \end{listing}
 
+
+\subsubsection{OpenCV: Capturar y mostrar imagenes de una cámara}
 Capturamos imagenes de la camara y la mostramos, finaliza cuando presionemos una tecla.
 
 \begin{lstlisting}[style=C]
 #!/usr/bin/env python
 import numpy as np
-import cv2
-cap = cv2.VideoCapture(0)
+import cv2 as cv
+cap = cv.VideoCapture(0)
+
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
     # Display the resulting frame
-    cv2.imshow('frame',frame)
-    if cv2.waitKey(10):
+    cv.imshow('frame',frame)
+    if cv.waitKey(1) & 0xFF==ord('q'):
         break
 # When everything done, release the capture
 cap.release()
-cv2.destroyAllWindows()	
+cv.destroyAllWindows()
 \end{lstlisting}
 
 \noindent
 Ahora ejecutamos con:
 		
 \begin{listing}[style=consola, numbers=none]
-python img_read.py
+python cam.py
 \end{listing}
 
+\begin{figure}[h!]
+		\caption{Imagenes capturadas con WebCam}
+		\includegraphics[width=\textwidth]{imagenes/cam.png}
+		\label{fig:5}
+		\centering
+\end{figure}
+
+\subsubsection{OpenCV: Capturar, modificar y mostrar imagenes de una cámara}
+
+A continuacion vamos a mostrar un ejemplo de como podemos dar un pasito mas, vamos a capturar imagenes de nuestra web cam, las modificaremos utilizando las funciones de OpenCV y las mostraremos en pantalla.
+
+\begin{lstlisting}[style=C]
+import numpy as np
+import cv2 as cv
+cap = cv.VideoCapture(0)
+while(True):
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    # Our operations on the frame come here
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    # Display the resulting frame
+    cv.imshow('frame',gray)
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        break
+# When everything done, release the capture
+cap.release()
+cv.destroyAllWindows()
+\end{lstlisting}
+
+Solo tenemos que ejecutarlo con en siguiente comando: 
+
+\begin{listing}[style=consola, numbers=none]
+python cam_gray.py
+\end{listing}
+
+\begin{figure}[h!]
+		\caption{Imagenes capturadas con WebCam con escala de grises}
+		\includegraphics[width=\textwidth]{imagenes/cam_gray.png}
+		\label{fig:5}
+		\centering
+\end{figure}
 
 
-\subsubsection{OpenNi: }
+\subsection{OpenNI.}
 
 Openni es un framework que nos define API's para escribir y utilizar Natural Interaction (NI). Estos nos permite comunicarnos a traves de gestos, expresiones, movimientos y descubrir el musndo mirando alreddor y manipulando elementos fisicos.
 
@@ -197,24 +301,7 @@ Lo que necesitamos para intalarlo en ubuntu es el paquete:
 sudo apt-get install ros-indigo-openni-launch
 \end{listing}
 
-Para poder utilizar estos ejemplos tenemos que asegurarnos de que la Kinect esta funcionando. Las pruebas que yo he realizado es asegurarme de que  freenect esta instalado. 
 
-Lo que tenemos que hacer es conocer si nuestro SO detencta la kinect. solo tenemos que hacer el siguiente comando en un termial 
-
-\begin{listing}[style=consola, numbers=none]
-lsusb
-\end{listing}
-
-El terminar deberia de darnos un autput como el que se muestra en la siguiente imagen:
-
-\begin{figure}[h!]
-		\caption{SO detecta la Kinect}
-		\includegraphics[width=\textwidth]{imagenes/lsusb.png}
-		\label{fig:4}
-		\centering
-\end{figure}
-
-Lo que he realizado es bajarme el repositorio con el stack de freenect y compilarlo desde mi workspace. A continuacion adjunto la dirección del repositorio \url{https://github.com/ros-drivers/freenect_stack.git}. Solo tendriamos que hacer el git clone en la carpeta donde queremos guardarlo. Antes de arrancar ningun programa de la kinect. Hacemos un lsusb y deberia de aparecer una imagen como la siguiente.
 
 
 
