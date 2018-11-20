@@ -11,7 +11,7 @@ Index:
 		1.3.2 Open CV -> Ejemplo con Codifo leer, modificar y mostrar imag.
 		1.3.3 Open NI -> Descripcion básica, instalacion y arrancar nodo.
 	 	1.3.4 PCL     -> Descripcion basica, instalacion.
-		1.3.5 Package ROS, Python, OpenCV (cv_bridge) y Kinect.
+		1.3.5 Programando Kinect usando Python, ROS, OpenCV (cv_bridge) y OpenNI.
 	1.4  Sensores. 
 		1.4.1 Ultrasonidos -> Explicación y conexión a Tiva C
 		1.4.2 MPU 	   -> Explicacion y conexión a Tiva C

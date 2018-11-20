@@ -301,9 +301,25 @@ Lo que necesitamos para intalarlo en ubuntu es el paquete:
 sudo apt-get install ros-indigo-openni-launch
 \end{listing}
 
+\subsection{PCL.}
+PCL es un Open Prject para procesado de imagenes 2D/3D y nueves de puntos. El framework PCL tiene incluido numerososo algoritmos de filtrado, segmentacion, reconstruccion y ajuste. Usando estos metodos podemos procesar las Nuves de Puntos y extraer descriptores para reconocer objetos del mundo real basandonos en su geometria   y crear superficies para visualizarlos.
+
+PCL tiene una licencia BSD. Es Open Souerce, gratis para comercio y para uso en investigacion. PCL es multiplataorma y esta perfectamente compilado y depurado en Linux, Mac OS X, Windows y Android. Se puede descargar desde la siguente direccion: http://pointclouds.org/downloads/
+
+PCL esta totalmente integrado dentro de ROS. La libreria PCL y su interfaz con ROS se instala justo a la instalacion del ROS full desktop, ya lo comentamos en capitulo anteriores. Con la siguente direccion podemos seguir investigando sobre ROS y PCL: http://wiki.ros.org/pcl.
+
+\subsection{Paquete ROS, Python, OpenCV(cv\_bridge) y Kinect.}
+A continuacion vamos ha mostrar un ejemplo de como podemos integrar todos los puntos anteriores,el software y los frameworks con ROS. Lo primero crearemos un paquete de ROS, con codigo en Python crearemos un programa de Open CV usando el interface con ROS cv\_bridge y usaremos a nuetra kinect para capturar las imagenes gracias al driver de Freenect.
+
+Freenect publicará las imagenes de profundidad y RGB ademas de las capturas de Infrarojos de la cámara.
+
+\subsubsection{Arrancar driver OpenNi}
 
 
+ 
 
+
+ 
 
 
 
