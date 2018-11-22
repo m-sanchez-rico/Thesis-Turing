@@ -313,10 +313,39 @@ A continuacion vamos ha mostrar un ejemplo de como podemos integrar todos los pu
 
 Freenect publicará las imagenes de profundidad y RGB ademas de las capturas de Infrarojos de la cámara.
 
-\subsubsection{Arrancar driver OpenNi}
+\subsubsection{Arrancar driver OpenNi/Freenect}
+En mi caso OpeNI nunca me funciono para poder visualizar imagenes de la Kinect. La alternativa que encontre fue utilizar el software libre que se llama freenect. En puntos anteriores describo como descargar y arrancar este software para publicar las imagenes en los topicos de ros. Adjunto comandos para arrancar freenect y ver imágenes de la cámara:
+
+Arrancamos el driver de la kinect:
+\begin{listing}[style=consola, numbers=none]
+roslaunch freenect_launch freenect.launch
+\end{listing}
+
+Arrancamos el nodo de ros image\_view indicando como argumento el nodo al que queremos que se conecte.  
+\begin{listing}[style=consola, numbers=none]
+rosrun image_view image_view image:=/camera/rgb/image_color
+\end{listing}
+
+\subsubsection{Arrancar driver OpenNi/Freenect}
+ROS esta compuesto por muchas librerías, OpenCV por su puesto está integrada y su principal uso es para procesar imágenes. El stack de ros se llama vision\_opencv, incluye la libreria completa de OpenCV y la interface para conectarse con ROS.
+
+Principales paquetes que nos aporta vision\_opencv:
+
+\begin{itemize}
+\item cv\_bridge: Este paquete contiene la clase cv\_bridge; esta clase convierte los mensajes imagen de ROS a las tipos de datos imagen de OpenCV y viceversa.
+\item image\_geometry: Esto contiene una colección de métodos para manejar las imágenes y la geometría de los píxeles.
+\end{itemize} 
+
+En la siguiente imagen describimos como se conectan los y openCV.
+
+\begin{figure}[h!]
+		\caption{Inteface OpenCV-ROS}
+		\includegraphics[width=\textwidth]{imagenes/ros-opencv.png}
+		\label{fig:5}
+		\centering
+\end{figure}
 
 
- 
 
 
  
