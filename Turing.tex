@@ -257,7 +257,7 @@ python cam.py
 
 \subsubsection{OpenCV: Capturar, modificar y mostrar imagenes de una cámara}
 
-A continuacion vamos a mostrar un ejemplo de como podemos dar un pasito mas, vamos a capturar imagenes de nuestra web cam, las modificaremos utilizando las funciones de OpenCV y las mostraremos en pantalla.
+A continuación vamos a mostrar un ejemplo de como podemos dar un pasito mas, vamos a capturar imágenes de nuestra web cam, las modificaremos utilizando las funciones de OpenCV y las mostraremos en pantalla.
 
 \begin{lstlisting}[style=C]
 import numpy as np
@@ -284,7 +284,7 @@ python cam_gray.py
 \end{listing}
 
 \begin{figure}[h!]
-		\caption{Imagenes capturadas con WebCam con escala de grises}
+		\caption{Imágenes capturadas con WebCam con escala de grises}
 		\includegraphics[width=\textwidth]{imagenes/cam_gray.png}
 		\label{fig:5}
 		\centering
@@ -293,28 +293,28 @@ python cam_gray.py
 
 \subsection{OpenNI.}
 
-Openni es un framework que nos define API's para escribir y utilizar Natural Interaction (NI). Estos nos permite comunicarnos a traves de gestos, expresiones, movimientos y descubrir el musndo mirando alreddor y manipulando elementos fisicos.
+Openni es un framework que nos define API's para escribir y utilizar Natural Interaction (NI). Estos nos permite comunicarnos a traves de gestos, expresiones, movimientos y descubrir el mundo mirando alrededor y manipulando elementos físicos.
 
-Lo que necesitamos para intalarlo en ubuntu es el paquete:
+Lo que necesitamos para instalarlo en Ubuntu es el paquete:
 
 \begin{listing}[style=consola, numbers=none]
 sudo apt-get install ros-indigo-openni-launch
 \end{listing}
 
 \subsection{PCL.}
-PCL es un Open Prject para procesado de imagenes 2D/3D y nueves de puntos. El framework PCL tiene incluido numerososo algoritmos de filtrado, segmentacion, reconstruccion y ajuste. Usando estos metodos podemos procesar las Nuves de Puntos y extraer descriptores para reconocer objetos del mundo real basandonos en su geometria   y crear superficies para visualizarlos.
+PCL es un Open Project para procesado de imágenes 2D/3D y nueves de puntos. El framework PCL tiene incluido numerosos algoritmos de filtrado, segmentación, reconstrucción y ajuste. Usando estos métodos podemos procesar las Nubes de Puntos y extraer descriptores para reconocer objetos del mundo real basándonos en su geometría y crear superficies para visualizarlos.
 
-PCL tiene una licencia BSD. Es Open Souerce, gratis para comercio y para uso en investigacion. PCL es multiplataorma y esta perfectamente compilado y depurado en Linux, Mac OS X, Windows y Android. Se puede descargar desde la siguente direccion: http://pointclouds.org/downloads/
+PCL tiene una licencia BSD. Es Open Source, gratis para comercio y para uso en investigación. PCL es multiplataorma y esta perfectamente compilado y depurado en Linux, Mac OS X, Windows y Android. Se puede descargar desde la siguente direccion: http://pointclouds.org/downloads/
 
 PCL esta totalmente integrado dentro de ROS. La libreria PCL y su interfaz con ROS se instala justo a la instalacion del ROS full desktop, ya lo comentamos en capitulo anteriores. Con la siguente direccion podemos seguir investigando sobre ROS y PCL: http://wiki.ros.org/pcl.
 
 \subsection{Paquete ROS, Python, OpenCV(cv\_bridge) y Kinect.}
-A continuacion vamos ha mostrar un ejemplo de como podemos integrar todos los puntos anteriores,el software y los frameworks con ROS. Lo primero crearemos un paquete de ROS, con codigo en Python crearemos un programa de Open CV usando el interface con ROS cv\_bridge y usaremos a nuetra kinect para capturar las imagenes gracias al driver de Freenect.
+A continuación vamos ha mostrar un ejemplo de como podemos integrar todos los puntos anteriores,el software y los frameworks con ROS. Lo primero crearemos un paquete de ROS, con código en Python crearemos un programa de Open CV usando la interface con ROS cv\_bridge y usaremos a nuetra kinect para capturar las imágenes gracias al driver de Freenect.
 
-Freenect publicará las imagenes de profundidad y RGB ademas de las capturas de Infrarojos de la cámara.
+Freenect publicará las imágenes de profundidad y RGB ademas de las capturas de Infrarrojos de la cámara.
 
 \subsubsection{Arrancar driver OpenNi/Freenect}
-En mi caso OpeNI nunca me funciono para poder visualizar imagenes de la Kinect. La alternativa que encontre fue utilizar el software libre que se llama freenect. En puntos anteriores describo como descargar y arrancar este software para publicar las imagenes en los topicos de ros. Adjunto comandos para arrancar freenect y ver imágenes de la cámara:
+En mi caso OpeNI nunca me funcionó para poder visualizar imágenes de la Kinect. La alternativa que encontré fue utilizar el software libre que se llama freenect. En puntos anteriores describo como descargar y arrancar este software para publicar las imágenes en los tópicos de ROS. Adjunto comandos para arrancar freenect y ver imágenes de la cámara:
 
 Arrancamos el driver de la kinect:
 \begin{listing}[style=consola, numbers=none]
@@ -327,7 +327,7 @@ rosrun image_view image_view image:=/camera/rgb/image_color
 \end{listing}
 
 \subsubsection{Arrancar driver OpenNi/Freenect}
-ROS esta compuesto por muchas librerías, OpenCV por su puesto está integrada y su principal uso es para procesar imágenes. El stack de ros se llama vision\_opencv, incluye la libreria completa de OpenCV y la interface para conectarse con ROS.
+ROS esta compuesto por muchas librerías, OpenCV por su puesto está integrada y su principal uso es para procesar imágenes. El stack de ros se llama vision\_opencv, incluye la librería completa de OpenCV y la interface para conectarse con ROS.
 
 Principales paquetes que nos aporta vision\_opencv:
 
@@ -336,14 +336,32 @@ Principales paquetes que nos aporta vision\_opencv:
 \item image\_geometry: Esto contiene una colección de métodos para manejar las imágenes y la geometría de los píxeles.
 \end{itemize} 
 
-En la siguiente imagen describimos como se conectan los y openCV.
+En la siguiente imagen describimos como se conectan los diferentes elementos entre sí y OpenCV.
 
 \begin{figure}[h!]
 		\caption{Inteface OpenCV-ROS}
-		\includegraphics[width=\textwidth]{imagenes/ros-opencv.png}
+		\includegraphics[scale=0.4]{imagenes/ros-opencv.png}
 		\label{fig:5}
 		\centering
 \end{figure}
+
+
+\subsubsection{Crear paquete de ROS}
+
+Con el siguiente comando creo un paquete para mi código:
+
+\begin{listing}[style=consola, numbers=none]
+catkin_create_pkg turing_opencv_pkg sensor_msgs cv_bridge rospy std_msgs
+\end{listing}
+
+\subsubsection{Crear paquete de ROS}
+
+Vamos a empezar con el código que no va a mostrar las imágenes.
+
+
+
+
+
 
 
 

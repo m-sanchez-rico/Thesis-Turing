@@ -5,7 +5,7 @@ Index:
 	 1.2 Materiales
 		1.2.1 Ordenadores
 		1.2.2 Componenetes Electricos.
-		1.2.3 Estructura del Robobot.
+		1.2.3 Estructura del Robot.
 	 1.3 Test preliminares.
 		1.3.1 Microsoft Kinect v1. -> Ej. funcinando kinect, ejemplo para ver imagenes.
 		1.3.2 Open CV -> Ejemplo con Codifo leer, modificar y mostrar imag.
