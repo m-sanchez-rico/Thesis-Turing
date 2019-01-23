@@ -59,8 +59,12 @@
     backgroundcolor=\color{gray75},
    }
  
-\lstdefinestyle{C}
-   {language=C,
+\lstdefinestyle{Python}
+   {
+   showstringspaces=false,
+   basicstyle=\tiny,
+   tabsize=2,
+   language=C,
    }
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -201,7 +205,7 @@ sudo apt-get install python-opnecv
 	\subsubsection{OpenCV: Leer .png y mostrar}	
 	Mostrat imagen del robot, la imagen tiene que estar en la misma carpeta que el codigo.
 
-\begin{lstlisting}[style=C]
+\begin{lstlisting}[style=Python]
 #!/usr/bin/env python
 import numpy as np
 import cv2
@@ -223,7 +227,7 @@ python img_read.py
 \subsubsection{OpenCV: Capturar y mostrar imagenes de una cámara}
 Capturamos imagenes de la camara y la mostramos, finaliza cuando presionemos una tecla.
 
-\begin{lstlisting}[style=C]
+\begin{lstlisting}[style=Python]
 #!/usr/bin/env python
 import numpy as np
 import cv2 as cv
@@ -259,7 +263,7 @@ python cam.py
 
 A continuación vamos a mostrar un ejemplo de como podemos dar un pasito mas, vamos a capturar imágenes de nuestra web cam, las modificaremos utilizando las funciones de OpenCV y las mostraremos en pantalla.
 
-\begin{lstlisting}[style=C]
+\begin{lstlisting}[style=Python]
 import numpy as np
 import cv2 as cv
 cap = cv.VideoCapture(0)
@@ -354,9 +358,129 @@ Con el siguiente comando creo un paquete para mi código:
 catkin_create_pkg turing_opencv_pkg sensor_msgs cv_bridge rospy std_msgs
 \end{listing}
 
-\subsubsection{Crear paquete de ROS}
+Una vez creado el paquete creamos el siguiente arbol de carpetas:
 
-Vamos a empezar con el código que no va a mostrar las imágenes.
+\begin{figure}[h!]
+		\caption{Turing OpenCV package}
+		\includegraphics{imagenes/tree_package_turing_opencv.png}
+		\label{fig:5}
+		\centering
+\end{figure}
+
+En verde podemos ver el fichero donde vamos a guardar el código que utilizamos para nuestro nodo de OpenCV.
+ 
+\subsubsection{Código para mostrar imágenes}
+
+Vamos a empezar con el código que nos va a mostrar las imágenes:
+
+% TODO explicar el codigo de a continuación.
+\begin{lstlisting}[style=Python]
+import rospy
+import sys
+import cv2
+import cv2.cv as cv
+from sensor_msgs.msg import Image, CameraInfo
+from cv_bridge import CvBridge, CvBridgeError
+import numpy as np
+
+class cvBridgeDemo():
+	def __init__(self):
+		self.node_name = "cv_bridge_demo"
+		#Initialize the ros node
+		rospy.init_node(self.node_name)
+		# What we do during shutdown
+		rospy.on_shutdown(self.cleanup)
+		# Create the OpenCV display window for the RGB image
+		self.cv_window_name = self.node_name
+		cv.NamedWindow(self.cv_window_name, cv.CV_WINDOW_NORMAL)
+		cv.MoveWindow(self.cv_window_name, 25, 75)
+		# And one for the depth image
+		cv.NamedWindow("Depth Image", cv.CV_WINDOW_NORMAL)
+		cv.MoveWindow("Depth Image", 25, 350)
+		# Create the cv_bridge object
+		self.bridge = CvBridge()
+		# Subscribe to the camera image and depth topics and set
+		# the appropriate callbacks
+		self.image_sub =
+		rospy.Subscriber("/camera/rgb/image_color", Image, self.image_callback)
+		self.depth_sub = rospy.Subscriber("/camera/depth/image_raw", Image, self.depth_callback)
+		rospy.loginfo("Waiting for image topics...")
+		
+	def image_callback(self, ros_image):
+	# Use cv_bridge() to convert the ROS image to OpenCV format
+		try:
+			frame = self.bridge.imgmsg_to_cv(ros_image, "bgr8")
+	
+		except CvBridgeError, e:
+			print e
+			# Convert the image to a Numpy array since most cv2 functions
+			# require Numpy arrays.
+			frame = np.array(frame, dtype=np.uint8)
+			# Process the frame using the process_image() function
+			display_image = self.process_image(frame)
+			# Display the image.
+			cv2.imshow(self.node_name, display_image)
+			# Process any keyboard commands
+			self.keystroke = cv.WaitKey(5)
+			if 32 <= self.keystroke and self.keystroke < 128:
+			cc = chr(self.keystroke).lower()
+
+	def depth_callback(self, ros_image):
+		# Use cv_bridge() to convert the ROS image to OpenCV format
+		try:
+		# The depth image is a single-channel float32 image
+			depth_image = self.bridge.imgmsg_to_cv(ros_image, "32FC1")
+		except CvBridgeError, e:
+			print e
+			# Convert the depth image to a Numpy array since most cv2 functions
+		# require Numpy arrays.
+		depth_array = np.array(depth_image, dtype=np.float32)
+		# Normalize the depth image to fall between 0 (black) and 1 (white)
+		cv2.normalize(depth_array, depth_array, 0, 1, cv2.NORM_MINMAX)
+		# Process the depth image
+		depth_display_image = self.process_depth_image(depth_array)
+		# Display the result
+		cv2.imshow("Depth Image", depth_display_image)
+
+	def process_image(self, frame):
+		# Convert to grayscale
+		grey = cv2.cvtColor(frame, cv.CV_BGR2GRAY)
+		# Blur the image
+		grey = cv2.blur(grey, (7, 7))
+		# Compute edges using the Canny edge filter
+		edges = cv2.Canny(grey, 15.0, 30.0)
+		return edges
+	
+	def process_depth_image(self, frame):
+		# Just return the raw image for this demo
+		return frame
+	
+	def cleanup(self):
+		print "Shutting down vision node."
+		cv2.destroyAllWindows()
+
+	def main(args):
+		try:
+			cvBridgeDemo()
+			rospy.spin()
+		except KeyboardInterrupt:
+			print "Shutting down vision node."
+			cv.DestroyAllWindows()
+	
+	if __name__ == '__main__':
+		main(sys.argv)
+
+\end{lstlisting}
+
+
+A continuación tenemos que compilar haciendo catkin_make en la raíz de nuestro workspace.
+
+Muestro todos los comandos seguidos para arrancar nuestro ejemplo.
+
+%%Comando arrancar freeneckt
+\begin{listing}[style=consola, numbers=none]
+catkin_create_pkg turing_opencv_pkg sensor_msgs cv_bridge rospy std_msgs
+\end{listing}
 
 
 
