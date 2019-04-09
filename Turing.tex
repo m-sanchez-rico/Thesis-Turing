@@ -477,15 +477,25 @@ A continuación tenemos que compilar haciendo catkin\_make en la raíz de nuestro 
 
 Muestro todos los comandos seguidos para arrancar nuestro ejemplo.
 
+Arrancamos el paquete de frennect para arrancar driver de kinect.
+
 %%Comando arrancar freeneckt
 \begin{listing}[style=consola, numbers=none]
 roslaunch freenect_launch freenect.launch
 \end{listing}
+
+Arrancamos el script que se conecta a la cámara y ejecuta el código anterior. 
 %Comando para arrancar el script de turing_opencv
 \begin{listing}[style=consola, numbers=none]
-roslaunch freenect_launch freenect.launch
+rosrun turing_opencv cv_bridge_demo.py
 \end{listing}
 
+
+\chapter{Sensores}
+En este capitulo comenzamos a trabajar con los sensores.
+% Me dejo pendiente la explicaciones sobre los componenetes.
+
+ 
 
 
 
