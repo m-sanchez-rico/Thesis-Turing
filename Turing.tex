@@ -479,7 +479,11 @@ Muestro todos los comandos seguidos para arrancar nuestro ejemplo.
 
 %%Comando arrancar freeneckt
 \begin{listing}[style=consola, numbers=none]
-catkin_create_pkg turing_opencv_pkg sensor_msgs cv_bridge rospy std_msgs
+roslaunch freenect_launch freenect.launch
+\end{listing}
+%Comando para arrancar el script de turing_opencv
+\begin{listing}[style=consola, numbers=none]
+roslaunch freenect_launch freenect.launch
 \end{listing}
 
 
