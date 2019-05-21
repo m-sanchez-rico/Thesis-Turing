@@ -492,10 +492,61 @@ rosrun turing_opencv cv_bridge_demo.py
 
 
 \chapter{Sensores}
-En este capitulo comenzamos a trabajar con los sensores.
-% Me dejo pendiente la explicaciones sobre los componenetes.
+En este capitulo comenzamos a trabajar con los sensores, vamos a introducir brevemente los tipo sde sensore que vamos a utilizar. Comenzamos instalando el IDE para programar nuestra placa, a la cual conectaremos nuestros sensores y actuadores. El modelo de la placa que vamos a utilizar lo detallavamos en el apartado 1.2.2 Componentes electronicos.
 
- 
+\subsection{Installing the Energia IDE}
+
+Para descargar el IDE de programacion que vamos a utilizar, tenemos que acceder a la siguiente pagina Web: http://energia.nu/download/ y nos descargamos el instalador para linux 64Bits.
+
+A continuacion accedemos a la siguiente ruta para conocer los detalles de la instalacion: http://energia.nu/guide/install/linux/.
+
+Los pasos son los siguientes:
+
+\begin{enumerate}
+\item Descargamos de http://energia.nu/download/ el software para linux 64 bits. En mi caso se llama \textit{energia-1.8.7E21-linux64.tar.xz}, acemos clic con boton derecho y descomprimimos.
+
+\item Con el siguiente comando movemos a la carpeta home:
+	\begin{listing}[style=consola, numbers=none]
+	mv ~/ Descargas/energia-1.8.7E21 /home/maikel/
+	\end{listing} 
+
+\item A continuacion vamos a la siguiente pagina: http://energia.nu/guide/install/linux/ Acemos clic en el enlace \textit{TI udev rules} y descargamos el fichero.
+
+\item Abrimos un terminar y accedemos a la carpeta donde se ha descargado el fichero, y ejecutamos el siguiente comando:
+	\begin{listing}[style=consola, numbers=none]
+	sudo mv /71-ti-permissions.rules /etc/udev/rules.d/
+	\end{listing}
+	Con este paso lo que hacemos es configurar el puerto (udev rules) para que la placa sea reconocida independientemente del puerto al que la conectemos.
+\item Reiniciamos nuestro ordenador.
+
+
+\item Para arrancar el ide de programación de la placa, necesitamos inicar una consola y acceder a la carpeta donde esten los archivos. El comando de inicio es el siguiente:
+	\begin{listing}[style=consola, numbers=none]
+	./energia
+	\end{listing}
+	
+\item Nuestro ultimo paso, despues de arrancar el IDE, vamos a Herraminetas -> placa -> Gestor de targetas. En el filtro de busqueda, indicamos el nombre de nuestra targeta, TM4C123G, aparecera en la lista la librerias comprobamos si las tenemo instalada y si no, solo tenemos que hacer clic en el boton instalar.
+\end{enumerate}
+
+
+\subsection{Testing Tiva C Launchpad and Energia IDE}
+
+Cuando ya tenemos nuestro software instalado y preparado para usarse, vamos a probar que podemos compilar, subir y ejecutar codigo en la placa.
+
+\begin{enumerate}
+\item Abrimos IDE y conectamos placa.
+\item Nos aseguramos que nuestro modelo de placa esta seleccionado, Herramientas -> placa: Launchpad(TivaC)tm4c123(80Mhz)
+\item Vamos a Archivo -> Ejemplos -> 1.Basics -> Fade. Se nos abrirá el codigo y le echamos un ojo.
+\item Hacemos click en el boton compilar, y si todo va bien veremos en la parte inferior un mensaje del compilador indicando el tamaño del codigo.
+\item Presionamos el boton subir y si todo va bien veremos en la consola inferion el mesaje de \textit{Succes}.
+\item Disfrutar del nuevo codigo añadido a la placa.
+\end{enumerate}
+
+Tras estos test, sabemos que nuestra placa funciona, es reconocida por el ordenador y que podemos subir nuevo codigo.
+
+\section{Ultrasonidos}
+%Continuamos por aqui%
+Los sensores ultrasonidos, los vamos a utilizar para medir las distacias a los objetos que encontremos y ser capaces de esquibar los obstaculos que encontrmos en el camino. El modelo de sensores 
 
 
 

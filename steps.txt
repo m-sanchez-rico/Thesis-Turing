@@ -12,14 +12,14 @@ Index:
 		1.3.3 Open NI -> Descripcion básica, instalacion y arrancar nodo.
 	 	1.3.4 PCL     -> Descripcion basica, instalacion.
 		1.3.5 Programando Kinect usando Python, ROS, OpenCV (cv_bridge) y OpenNI.
-	1.4  Sensores. 
-		1.4.1 Ultrasonidos -> Explicación y conexión a Tiva C
-		1.4.2 MPU 	   -> Explicacion y conexión a Tiva C
+	1.4  Sensores.
+		1.4.1 Instalacion del IDE Energia. 
+		1.4.2 Ultrasonidos -> Explicación, conexión a Tiva C y ejemplos.
+		1.4.3 MPU 	   -> Explicacion, conexión a Tiva C y ejemplos.
 	1.5 Actuadores y encoders.
-		1.5.1 Intro a Diferencial Drive y 
-		1.5.2 Instalacion IDE progamacion launchpad (Energia).
-		1.5.3 Actuadores: Codigo e interface.  
-		1.5.4 Encoders: Codigo e interface.
+		1.5.1 Intro a Diferencial Drive. 
+		1.5.2 Actuadores: Codigo e interface.  
+		1.5.3 Encoders: Codigo e interface.
 	1.6 Integracion en ROS.
 		1.5.1 TODO
 
