@@ -120,28 +120,28 @@ A continuación mostramos un ejemplo.
 En este anexo vamos a ir listando los diferentes comandos que nos pueden ser utilies para Ubuntu, ROS, etc.
 
 \begin{itemize}
-	
-	\item Buscas paquetes disponibles en ROS: 
+
+\item Buscas paquetes disponibles en ROS: 
 \begin{listing}[style=consola, numbers=none]
  sudo apt-cache search ros-indigo | grep opencv
 \end{listing}
-	
-	
 
-	\end{itemize} 
+\end{itemize} 
 
 
 \chapter*{Anexo IV: Paquetes necesarios }
+
+Paquetes necesarios para abrir simulador chefbot:
 \begin{itemize}
- Paquetes necesarios para abrir simulador chefbot:
  \item sudo apt-get install ros-indigo-turtlebot-description
  \item sudo apt-get install ros-indigo-turtlebot-bringup
- 
 \end{itemize}
 
 
 \chapter*{Anexo V: Configurar Qtcreator}
-Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide de desarrollo para ROS.
+%Capitulo a modificar, utilizando el pliguin de ROS para qutcreator.%
+% https://ros-qtc-plugin.readthedocs.io/en/latest/ %
+Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide de desarrollo para ROS.  
 
 	\begin{enumerate}
 	\item Tenemos que abrir Qtcreator desde terminal, por que automáticamente carga el fichero $~/.bashrc$ el cual es el encargado de configurar el workspace 		de ROS.
@@ -152,10 +152,29 @@ Con este anexo quiero dejar claro como tengo que configurar Qtcreator para ide d
 	\item Hacemos click derecho sobre el directorio del proyecto y hacemos run CMake.  
 	\end{enumerate}
 
-Provamos $https://answers.ros.org/question/91516/qt-creator-281-ros-and-catkin-problems/$
+Probamos $https://answers.ros.org/question/91516/qt-creator-281-ros-and-catkin-problems/$
 
+\chapter*{Anexo VI: Tiva C Launchpad}
 
+A continuación voy a anotar información importante sobre la placa, 
 
+\section{Pin Maps}
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.3]{imagenes/EK-TM4C123GXL.jpg}
+		\label{fig:5}
+		\centering
+		\caption{Sensor Ultrasonido HC-SR04}
+\end{figure}
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.3]{imagenes/EK-TM4C123GXL-BACK.jpg}
+		\label{fig:5}
+		\centering
+		\caption{Sensor Ultrasonido HC-SR04}
+\end{figure}
+
+\section{Tutoriales}
 
 
 

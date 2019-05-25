@@ -143,10 +143,10 @@ lsusb
 El terminar deberia de darnos un output como el que se muestra en la siguiente imagen:
 
 \begin{figure}[h!]
-		\caption{SO detecta la Kinect}
 		\includegraphics[width=\textwidth]{imagenes/lsusb.png}
 		\label{fig:4}
 		\centering
+		\caption{SO detecta la Kinect}
 \end{figure}
 
 A continuacion vamos a descargar el stack donde estan todos los driver, vamos a la carpeta catkin\_ws/src. Y ejecutamos el siguiente comando:
@@ -176,10 +176,10 @@ rosrun image_view image_view image:=/camera/depth/image_rect
 A continuacion vermos como se abre un a ventana y aprecen las imagenes capturadas por la Kinect:
 
 \begin{figure}[h!]
-		\caption{Imagenes capturadas por Kinect}
 		\includegraphics[width=\textwidth]{imagenes/kinect_test1.png}
 		\label{fig:5}
 		\centering
+		\caption{Imagenes capturadas por Kinect}
 \end{figure}
 
 Una vez sabemos seguro que nuestra rensor RGBD esta funcionando. Sigamos con el software adicional que necesitamos.
@@ -253,10 +253,10 @@ python cam.py
 \end{listing}
 
 \begin{figure}[h!]
-		\caption{Imagenes capturadas con WebCam}
 		\includegraphics[scale=0.4]{imagenes/cam.png}
 		\label{fig:5}
 		\centering
+		\caption{Imagenes capturadas con WebCam}
 \end{figure}
 
 \subsubsection{OpenCV: Capturar, modificar y mostrar imagenes de una cámara}
@@ -288,10 +288,10 @@ python cam_gray.py
 \end{listing}
 
 \begin{figure}[h!]
-		\caption{Imágenes capturadas con WebCam con escala de grises}
 		\includegraphics[scale=0.4]{imagenes/cam_gray.png}
 		\label{fig:5}
 		\centering
+		\caption{Imágenes capturadas con WebCam con escala de grises}
 \end{figure}
 
 
@@ -343,10 +343,10 @@ Principales paquetes que nos aporta vision\_opencv:
 En la siguiente imagen describimos como se conectan los diferentes elementos entre sí y OpenCV.
 
 \begin{figure}[h!]
-		\caption{Inteface OpenCV-ROS}
 		\includegraphics[scale=0.4]{imagenes/ros-opencv.png}
 		\label{fig:5}
 		\centering
+		\caption{Inteface OpenCV-ROS}
 \end{figure}
 
 
@@ -361,10 +361,10 @@ catkin_create_pkg turing_opencv_pkg sensor_msgs cv_bridge rospy std_msgs
 Una vez creado el paquete creamos el siguiente arbol de carpetas:
 
 \begin{figure}[h!]
-		\caption{Turing OpenCV package}
 		\includegraphics[scale=0.5]{imagenes/tree_package_turing_opencv.png}
 		\label{fig:5}
 		\centering
+		\caption{Turing OpenCV package}
 \end{figure}
 
 En verde podemos ver el fichero donde vamos a guardar el código que utilizamos para nuestro nodo de OpenCV.
@@ -492,24 +492,40 @@ rosrun turing_opencv cv_bridge_demo.py
 
 
 \chapter{Sensores}
-En este capitulo comenzamos a trabajar con los sensores, vamos a introducir brevemente los tipo sde sensore que vamos a utilizar. Comenzamos instalando el IDE para programar nuestra placa, a la cual conectaremos nuestros sensores y actuadores. El modelo de la placa que vamos a utilizar lo detallavamos en el apartado 1.2.2 Componentes electronicos.
+En este capitulo comenzamos a trabajar con los sensores, vamos a introducir brevemente los tipo sde sensore que vamos a utilizar. Comenzamos instalando el IDE para programar nuestra placa, a la cual conectaremos nuestros sensores y actuadores. El modelo de la placa que vamos a utilizar lo detallábamos en el apartado 1.2.2 Componentes electrónicos.
 
 \section{Placa Controladora embedded}
 
-Las placas controladoras, son normalmente placas de entrada y salida, las cuales pueden enviar señales de control de pulsos digitales a la controladora de los motores y puede recivir señales de entrada desde los sensores. Tambien la podemos utilizar como interfaz para conocer la señales de los encoders de los motores.
-Las funciones que va a tener la placa en el robot seran:
+Las placas controladoras, son normalmente placas de entrada y salida, las cuales pueden enviar señales de control de pulsos digitales a la controladora de los motores y puede recivir señales de entrada desde los sensores. También la podemos utilizar como interfaz para conocer la señales de los encoders de los motores.
+Las funciones que va a tener la placa en el robot serán:
 \begin{itemize}
 \item Hacer de interfaz entre el driver del motor y los encoders.
 \item Conectar los sensores de ultrasonidos
-\item Enviar y recivir los valores de los sensores al PC y desde el PC.
+\item Enviar y recibir los valores de los sensores al PC y desde el PC.
 \end{itemize}
 
-El los siguientes capitulos nos pelearemos conectando a la placa los diferentes elementos. Las placas mas populares en el mercado son los Arduinos, las Raspberry y las Tiva C Launchpad. Nosotros vamos a seleccionar la Tiva C Launchpad por encima del arduino por las siguientes motivos:
+El los siguientes capítulos nos pelearemos conectando a la placa los diferentes elementos. Las placas mas populares en el mercado son los Arduinos, las Raspberry y las Tiva C Launchpad. Nosotros vamos a seleccionar la Tiva C Launchpad por encima del arduino por las siguientes motivos:
 \begin{itemize}
-\item Tiva C LaunchPad tiene un micro controlador de 32bits ARM Cortex-M4 con 256KB de memoria Flash, 32 KB SRAM y 80Mhz de operacion. Anque la mayoria de arduinos tienen las mismas especificaciones.
-\itam %msan TODO%
+\item Tiva C LaunchPad tiene un micro controlador de 32bits ARM Cortex-M4 con 256KB de memoria Flash, 32 KB SRAM y 80Mhz de operación. Aunque la mayoría de arduinos tienen las mismas especificaciones.
+\item 12 temporizadores.
+\item 16 salidas PWM.
+\item 2 entradas de encoders.
+\item 8 receptores/transmisores asíncronos universales (UART).
+\item Entradas/salidas de 5V (GPIO).
+\item Económicas y un tamaño menor a los arduinos.
+\item Fácil de programar con un IDE llamado Energia (http://energia.nu/).
 \end{itemize}
- 
+
+Mostramos a continuación una imagen nuestra placa de Texas instruments Tiva C Launchpad:
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.2]{imagenes/TivaLaunchpad.jpg}
+		\label{fig:5}
+		\centering
+		\caption{Tiva C Launchpad TM4C123GXL}
+\end{figure}
+
+Es importante conocer la lista de pines de la placa, adjuntamos a continuación el enlace donde podemos consultarlo, http://energia.nu/pinmaps/ek-tm4c123gxl/. En el documento de anoxos podemos ampliar informacion sobre pins etc.
 
 \subsection{Installing the Energia IDE}
 
@@ -548,7 +564,7 @@ Los pasos son los siguientes:
 
 \subsection{Testing Tiva C Launchpad and Energia IDE}
 
-Cuando ya tenemos nuestro software instalado y preparado para usarse, vamos a probar que podemos compilar, subir y ejecutar codigo en la placa.
+Cuando ya tenemos nuestro software instalado y preparado para usarse, vamos a probar que podemos compilar, subir y ejecutar código en la placa.
 
 \begin{enumerate}
 \item Abrimos IDE y conectamos placa.
@@ -573,10 +589,10 @@ Los sensores ultrasonidos, los vamos a utilizar para medir las distacias a los o
 A continuación mostramos una imagen:
 
 \begin{figure}[h!]
-		\caption{Sensor Ultrasonido HC-SR04}
 		\includegraphics[scale=0.3]{imagenes/ultrasonido_HC-SR04.png}
 		\label{fig:5}
 		\centering
+		\caption{Sensor Ultrasonido HC-SR04}
 \end{figure}
 
 La descripcion de los pines es la siguiente:
@@ -588,7 +604,7 @@ La descripcion de los pines es la siguiente:
 \hline
 Pines & Funcion \\
 \hline \hline
-Vcc, GND & Estos pines son alimentacion(+) y tierra(-). Normalmente aplicamos 5V.  \\ \hline
+Vcc, GND & Estos pines son alimentación(+) y tierra(-). Normalmente aplicamos 5V.  \\ \hline
 Trig & La entrada de señal al sensor. Aplicamos un pulso con una duracion determinada para enviar ondas de ultrasonido.\\ \hline
 Echo & Esta es la salida del sensor. El dispositivo generará un pulso en este pin con una duracion deacuerdo al retaso recivido al pulso del trig. \\ \hline
 \end{tabular}
@@ -1041,7 +1057,7 @@ Primero nos muestra la teoría completa para proporcionar experimentos básicos of
 		\emph{UMH 2016}, Alumnos y profesores UMH, Libro Control Sensorial de Sistemas Robóticos (CSSR)
 
 	\bibitem{2}
-		\emph{Carlos Perez}, Apuntes Asignatura de Control Sensorial de Sistemas Robóticos. Master Robótica UMH 2017
+		\emph{Carlos Pérez}, Apuntes Asignatura de Control Sensorial de Sistemas Robóticos. Master Robótica UMH 2017
  
 	\bibitem{3} 
 	\emph{Masaru Uchiyama and Kosei Kitagaki},Dynamic force sensing for high-speed robot manipulation.
