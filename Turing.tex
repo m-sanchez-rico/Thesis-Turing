@@ -15,6 +15,8 @@
 
 \usepackage{hyperref}
 
+\usepackage{float}
+
 %\date{16 Septiembre 2017}
 \author{Miguel Ignacio Sánchez }
 \title{\textbf{PROYECTO TURING}}
@@ -308,10 +310,9 @@ sudo apt-get install ros-indigo-openni-launch
 \subsection{PCL.}
 PCL es un Open Project para procesado de imágenes 2D/3D y nueves de puntos. El framework PCL tiene incluido numerosos algoritmos de filtrado, segmentación, reconstrucción y ajuste. Usando estos métodos podemos procesar las Nubes de Puntos y extraer descriptores para reconocer objetos del mundo real basándonos en su geometría y crear superficies para visualizarlos.
 
-PCL tiene una licencia BSD. Es Open Source, gratis para comercio y para uso en investigación. PCL es multiplataorma y esta perfectamente compilado y depurado en Linux, Mac OS X, Windows y Android. Se puede descargar desde la siguente direccion: http://pointclouds.org/downloads/
+PCL tiene una licencia BSD. Es Open Source, gratis para comercio y para uso en investigación. PCL es multiplataorma y esta perfectamente compilado y depurado en Linux, Mac OS X, Windows y Android. Se puede descargar desde la siguente direccion: \url{http://pointclouds.org/downloads/} 
 
-PCL esta totalmente integrado dentro de ROS. La libreria PCL y su interfaz con ROS se instala justo a la instalacion del ROS full desktop, ya lo comentamos en capitulo anteriores. Con la siguente direccion podemos seguir investigando sobre ROS y PCL: http://wiki.ros.org/pcl.
-
+PCL esta totalmente integrado dentro de ROS. La libreria PCL y su interfaz con ROS se instala justo a la instalacion del ROS full desktop, ya lo comentamos en capitulo anteriores. Con la siguente direccion podemos seguir investigando sobre ROS y PCL: \url{http://wiki.ros.org/pcl}. 
 \subsection{Paquete ROS, Python, OpenCV(cv\_bridge) y Kinect.}
 A continuación vamos ha mostrar un ejemplo de como podemos integrar todos los puntos anteriores,el software y los frameworks con ROS. Lo primero crearemos un paquete de ROS, con código en Python crearemos un programa de Open CV usando la interface con ROS cv\_bridge y usaremos a nuetra kinect para capturar las imágenes gracias al driver de Freenect.
 
@@ -513,7 +514,7 @@ El los siguientes capítulos nos pelearemos conectando a la placa los diferentes 
 \item 8 receptores/transmisores asíncronos universales (UART).
 \item Entradas/salidas de 5V (GPIO).
 \item Económicas y un tamaño menor a los arduinos.
-\item Fácil de programar con un IDE llamado Energia (http://energia.nu/).
+\item Fácil de programar con un IDE llamado Energia (\url{http://energia.nu/}).
 \end{itemize}
 
 Mostramos a continuación una imagen nuestra placa de Texas instruments Tiva C Launchpad:
@@ -525,25 +526,25 @@ Mostramos a continuación una imagen nuestra placa de Texas instruments Tiva C La
 		\caption{Tiva C Launchpad TM4C123GXL}
 \end{figure}
 
-Es importante conocer la lista de pines de la placa, adjuntamos a continuación el enlace donde podemos consultarlo, http://energia.nu/pinmaps/ek-tm4c123gxl/. En el documento de anoxos podemos ampliar informacion sobre pins etc.
+Es importante conocer la lista de pines de la placa, adjuntamos a continuación el enlace donde podemos consultarlo,\url{http://energia.nu/pinmaps/ek-tm4c123gxl/}. En el documento de anoxos podemos ampliar informacion sobre pins etc.
 
 \subsection{Installing the Energia IDE}
 
-Para descargar el IDE de programacion que vamos a utilizar, tenemos que acceder a la siguiente pagina Web: http://energia.nu/download/ y nos descargamos el instalador para linux 64Bits.
+Para descargar el IDE de programacion que vamos a utilizar, tenemos que acceder a la siguiente pagina Web: \url{http://energia.nu/download/} y nos descargamos el instalador para linux 64Bits.
 
-A continuacion accedemos a la siguiente ruta para conocer los detalles de la instalacion: http://energia.nu/guide/install/linux/.
+A continuacion accedemos a la siguiente ruta para conocer los detalles de la instalacion: \url{http://energia.nu/guide/install/linux/}.
 
 Los pasos son los siguientes:
 
 \begin{enumerate}
-\item Descargamos de http://energia.nu/download/ el software para linux 64 bits. En mi caso se llama \textit{energia-1.8.7E21-linux64.tar.xz}, acemos clic con boton derecho y descomprimimos.
+\item Descargamos de \url{http://energia.nu/download/} el software para linux 64 bits. En mi caso se llama \textit{energia-1.8.7E21-linux64.tar.xz}, acemos clic con boton derecho y descomprimimos.
 
 \item Con el siguiente comando movemos a la carpeta home:
 	\begin{listing}[style=consola, numbers=none]
 	mv ~/ Descargas/energia-1.8.7E21 /home/maikel/
 	\end{listing} 
 
-\item A continuacion vamos a la siguiente pagina: http://energia.nu/guide/install/linux/ Acemos clic en el enlace \textit{TI udev rules} y descargamos el fichero.
+\item A continuacion vamos a la siguiente pagina: \url{http://energia.nu/guide/install/linux/} Hacemos clic en el enlace \textit{TI udev rules} y descargamos el fichero.
 
 \item Abrimos un terminar y accedemos a la carpeta donde se ha descargado el fichero, y ejecutamos el siguiente comando:
 	\begin{listing}[style=consola, numbers=none]
@@ -578,7 +579,6 @@ Cuando ya tenemos nuestro software instalado y preparado para usarse, vamos a pr
 Tras estos test, sabemos que nuestra placa funciona, es reconocida por el ordenador y que podemos subir nuevo codigo.
 
 \section{Ultrasonidos}
-%Continuamos por aqui%
 Los sensores ultrasonidos, los vamos a utilizar para medir las distacias a los objetos que encontremos y con la ayuda de estos seremos capaces de esquibar los obstaculos que encontrmos en el camino. El modelo de sensores son lod populares y baratos HC-SR04 y los seleccionamos por los siguientes motivos:
 \begin{itemize}
 \item Rango de distancias a medir son desde 2cm a 4m.
@@ -595,10 +595,9 @@ A continuación mostramos una imagen:
 		\caption{Sensor Ultrasonido HC-SR04}
 \end{figure}
 
-La descripcion de los pines es la siguiente:
+La descripción de los pines es la siguiente:
 
-
-\begin{table}[!htbp]
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{|p{2cm}| p{11cm}|}
 \hline
@@ -613,15 +612,21 @@ Echo & Esta es la salida del sensor. El dispositivo generará un pulso en este pi
 \end{center}
 \end{table}
 
- 
+\subsection{Probando Ultrasonidos}
 
+El princicpio de funcionamiento de este sensores de ultrasonidos es el siguiente. El sensosor consiste en un transmisor y un receptor, el transmisor enviará una señal a una frecuencia que los humanos no podemos escuchar, el receptor estara escuchando hasta recivir el eco de la señal tras haber rebotado en algun obstaculo. La distacia la obtendremos de de calcular el tiempo transcurrido entre el envió de la señal y la recepción dividida entre dos. Tenemos que tener en cuenta que la velocidad del sonido es de 340 m/s.
 
+\begin{equation}\label{eq:1}
+		D=\frac{v*t}{2}
+	\end{equation}
 
+Donde D = Distacia al obstaculo (m), v = velocidad de la luz (m/s), t = tiempo transcurrido (s).
 
+La mayoria de sensores de ultrasonidos tienen un rango de detección que va desde los 2cm a los 400cm.
 
+\subsection{conectando HC-SR04 a TIVA C Launchpad}
 
-
-
+En la siguiente figura mostramos la conexion entre el sensor de ultrasonidos y la placa que lo manejará.
 
 
 
