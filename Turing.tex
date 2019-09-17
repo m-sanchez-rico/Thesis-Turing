@@ -570,7 +570,7 @@ Cuando ya tenemos nuestro software instalado y preparado para usarse, vamos a pr
 \begin{enumerate}
 \item Abrimos IDE y conectamos placa.
 \item Nos aseguramos que nuestro modelo de placa esta seleccionado, Herramientas -> placa: Launchpad(TivaC)tm4c123(80Mhz)
-\item Vamos a Archivo -> Ejemplos -> 1.Basics -> Fade. Se nos abrirá el código y le echamos un ojo.
+\item Vamos a Archivo -> Ejemplos - 1.Basics - Fade. Se nos abrirá el código y le echamos un ojo.
 \item Hacemos clic en el boton compilar, y si todo va bien veremos en la parte inferior un mensaje del compilador indicando el tamaño del codigo.
 \item Presionamos el boton subir y si todo va bien veremos en la consola inferior el mesaje de \textit{Succes}.
 \item Disfrutar del nuevo código añadido a la placa.
@@ -722,9 +722,9 @@ long microsecndsToCentimeters(long microseconds)
 
 \subsection{Conectando Tiva C con LaunchPad with Python}
 
-Primero vamos a instalar PySerial. Es un modulo para conectar nuestro Launchpad a python. En internet existe un monton de documentacion a respecto.
+Primero vamos a instalar PySerial. Es un modulo para conectar nuestro Launchpad a python. En internet existe un monton de documentación a respecto.
 
-Nosotros estamos con Ubuntu y tenemos el paquete oficial que puede ser facilmente instalado con el siguiente comando:
+Nosotros estamos con Ubuntu y tenemos el paquete oficial que puede ser fácilmente instalado con el siguiente comando:
 
 \begin{listing}[style=consola, numbers=none]
 sudo apt-get install python-serial
@@ -757,6 +757,19 @@ while True:
 		sys.exit(0)	
 
 \end{lstlisting}
+
+
+\section{IMU Sensor MAgnetico Inercial}
+A continuación vamos a comprobar como funciona nuestro IMU. Lo primero que vamos a hacer es mostrar el esquema de como debemos de conectar el sensor a nuestra placa.
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.3]{imagenes/TIVA-MPU.JPG}
+		\label{fig:5}
+		\centering
+		\caption{Conexion IMU a Tiva C Launchpad}
+\end{figure}
+
+A continuación necesitamos añadir las librerías (las tenemos dentro del paquete también) al para que el código funcione. A continuación, copiamos el código y compilamos y pasamos a la placa. Primero comprbaremos con el monitor serie del energia. Y segundo comprobaremos ejecutando el código del py_serial que esta en la carpeta interface. 
 
 
 
