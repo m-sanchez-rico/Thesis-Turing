@@ -760,16 +760,29 @@ while True:
 
 
 \section{IMU Sensor MAgnetico Inercial}
-A continuación vamos a comprobar como funciona nuestro IMU. Lo primero que vamos a hacer es mostrar el esquema de como debemos de conectar el sensor a nuestra placa.
 
 \begin{figure}[h!]
-		\includegraphics[scale=0.3]{imagenes/TIVA-MPU.JPG}
+		\includegraphics[scale=0.05]{imagenes/TIVA-MPU.JPG}
 		\label{fig:5}
 		\centering
 		\caption{Conexion IMU a Tiva C Launchpad}
 \end{figure}
 
-A continuación necesitamos añadir las librerías (las tenemos dentro del paquete también) al para que el código funcione. A continuación, copiamos el código y compilamos y pasamos a la placa. Primero comprbaremos con el monitor serie del energia. Y segundo comprobaremos ejecutando el código del py_serial que esta en la carpeta interface. 
+A continuación vamos a comprobar como funciona nuestro IMU. Lo primero que vamos a hacer es mostrar el esquema de como debemos de conectar el sensor a nuestra placa.
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.3]{imagenes/energia_library.jpg}
+		\label{fig:5}
+		\centering
+		\caption{Energia añadiendo librerías}
+\end{figure}
+
+A continuación necesitamos añadir las librerías para poder compilar el proyecto. Las librerias las podeis encontrar en mis repositorios del github  \url{https://github.com/m-sanchez-rico/tiva_code/tree/master/Libraries}. Para añadir las librerías, abrimos energia y vamos a programa - Incluir libreria - Añadir Libreria ZIP.
+
+A continuación, copiamos el código y compilamos y pasamos a la placa. Primero comprobaremos con el monitor serie del energia. Y segundo comprobaremos ejecutando el código del pyserial que esta en la carpeta interface. Para ver la lectura en ros solo tenemos que ejecutar el script como hicimos en el caso del ultrasonido.
+
+
+
 
 
 
