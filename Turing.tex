@@ -41,7 +41,7 @@
      %
      stringstyle=\ttfamily,
      showstringspaces = false,
-     basicstyle=\small\ttfamily,
+     basicstyle=\fontsize{20}{13}\selectfont\ttfamily,
      commentstyle=\color{gray45},
      keywordstyle=\bfseries,
      %
@@ -127,13 +127,13 @@ La primera estructura del robot la vamos a hacer con madera, se base en tres pla
 
 \textbf{ADJUNTAMOS IMÁGENES EN CAD DE LA ESTRUCTURA REALIZADAS}
 
-
+\chapter{Camaras y OpenCV}
 \section{Tests preliminares.}
 Lo primero de todo necesario para acometer el proyecto es instalar ROS, damos por hecho que podemos hacerlo, existen millones de tutoriales y libros que nos pueden ayudar con esto.
 
 A continuación vamos a probar los componentes de forma individual antes del robot. Con la corta experiencia que tengo, se que muchas ROS y entre muchos de los paquetes que son libres, existen muchas fuentes de error o de posibles faltas de software compatible etc. Por lo tanto, considero que es muy importante partir de todos los elementos probados y habiendo realizado algún pequeño test o aplicación. De esta forma nos aseguraremos que tenemos todo el software necesario y si no, pelearemos con problemas un poco mas acotados.
 
-\subsection{Microsoft Kinect v1.}
+\section{Microsoft Kinect v1.}
 El robot que vamos a crear tienen un sensor 3D, la Kinect de Microsoft. Este sensor nos da la posibilidad de trabajar con librerías de Visión Artificial como son OpenCV, OpenNI, y Point Cloud Library (PCL). Estas librerias las utilizaremos para conceder a nuestro robot la habilidad de navegar de forma autonoma, ser capaz de evitar obstaculos detectar personas o hacer trackind de las diferentes usuarios.
 
 Para poder utilizar estos ejemplos tenemos que asegurarnos de que la Kinect esta funcionando. Lo primero que tenemos que hacer es conocer si nuestro SO detencta la kinect,ejecutamos el siguiente comando en un termial: 
@@ -187,7 +187,7 @@ A continuacion vermos como se abre un a ventana y aprecen las imagenes capturada
 Una vez sabemos seguro que nuestra rensor RGBD esta funcionando. Sigamos con el software adicional que necesitamos.
 
 
-\subsection{OpenCV.}
+\section{OpenCV.}
  Teoricamente este paquete se instala por defecto cuando instalamos \textsf{ros-indigo-desktop-full}. De todas maneras con el siguiente comando podemos asegurarnos de tenerlo perfectamente instalado: 
 
 \begin{listing}[style=consola, numbers=none]
@@ -204,7 +204,7 @@ sudo apt-get install python-opnecv
 	Los ejemplos que vamos a mostrar de OpenCV, los hemos testeado con una web cam corriente (Genius Eye 320).
 	
 	
-	\subsubsection{OpenCV: Leer .png y mostrar}	
+	\subsection{OpenCV: Leer .png y mostrar}	
 	Mostrat imagen del robot, la imagen tiene que estar en la misma carpeta que el codigo.
 
 \begin{lstlisting}[style=Python]
@@ -226,7 +226,7 @@ python img_read.py
 \end{listing}
 
 
-\subsubsection{OpenCV: Capturar y mostrar imagenes de una cámara}
+\subsection{OpenCV: Capturar y mostrar imagenes de una cámara}
 Capturamos imagenes de la camara y la mostramos, finaliza cuando presionemos una tecla.
 
 \begin{lstlisting}[style=Python]
@@ -261,7 +261,7 @@ python cam.py
 		\caption{Imagenes capturadas con WebCam}
 \end{figure}
 
-\subsubsection{OpenCV: Capturar, modificar y mostrar imagenes de una cámara}
+\subsection{OpenCV: Capturar, modificar y mostrar imagenes de una cámara}
 
 A continuación vamos a mostrar un ejemplo de como podemos dar un pasito mas, vamos a capturar imágenes de nuestra web cam, las modificaremos utilizando las funciones de OpenCV y las mostraremos en pantalla.
 
@@ -297,7 +297,7 @@ python cam_gray.py
 \end{figure}
 
 
-\subsection{OpenNI.}
+\section{OpenNI.}
 
 Openni es un framework que nos define API's para escribir y utilizar Natural Interaction (NI). Estos nos permite comunicarnos a traves de gestos, expresiones, movimientos y descubrir el mundo mirando alrededor y manipulando elementos físicos.
 
@@ -307,18 +307,18 @@ Lo que necesitamos para instalarlo en Ubuntu es el paquete:
 sudo apt-get install ros-indigo-openni-launch
 \end{listing}
 
-\subsection{PCL.}
+\section{PCL.}
 PCL es un Open Project para procesado de imágenes 2D/3D y nueves de puntos. El framework PCL tiene incluido numerosos algoritmos de filtrado, segmentación, reconstrucción y ajuste. Usando estos métodos podemos procesar las Nubes de Puntos y extraer descriptores para reconocer objetos del mundo real basándonos en su geometría y crear superficies para visualizarlos.
 
 PCL tiene una licencia BSD. Es Open Source, gratis para comercio y para uso en investigación. PCL es multiplataorma y esta perfectamente compilado y depurado en Linux, Mac OS X, Windows y Android. Se puede descargar desde la siguente direccion: \url{http://pointclouds.org/downloads/} 
 
 PCL esta totalmente integrado dentro de ROS. La libreria PCL y su interfaz con ROS se instala justo a la instalacion del ROS full desktop, ya lo comentamos en capitulo anteriores. Con la siguente direccion podemos seguir investigando sobre ROS y PCL: \url{http://wiki.ros.org/pcl}. 
-\subsection{Paquete ROS, Python, OpenCV(cv\_bridge) y Kinect.}
+\section{Paquete ROS, Python, OpenCV(cv\_bridge) y Kinect.}
 A continuación vamos ha mostrar un ejemplo de como podemos integrar todos los puntos anteriores,el software y los frameworks con ROS. Lo primero crearemos un paquete de ROS, con código en Python crearemos un programa de Open CV usando la interface con ROS cv\_bridge y usaremos a nuetra kinect para capturar las imágenes gracias al driver de Freenect.
 
 Freenect publicará las imágenes de profundidad y RGB ademas de las capturas de Infrarrojos de la cámara.
 
-\subsubsection{Arrancar driver OpenNi/Freenect}
+\subsection{Arrancar driver OpenNi/Freenect}
 En mi caso OpeNI nunca me funcionó para poder visualizar imágenes de la Kinect. La alternativa que encontré fue utilizar el software libre que se llama freenect. En puntos anteriores describo como descargar y arrancar este software para publicar las imágenes en los tópicos de ROS. Adjunto comandos para arrancar freenect y ver imágenes de la cámara:
 
 Arrancamos el driver de la kinect:
@@ -331,7 +331,7 @@ Arrancamos el nodo de ros image\_view indicando como argumento el topic al que q
 rosrun image_view image_view image:=/camera/rgb/image_color
 \end{listing}
 
-\subsubsection{Arrancar driver OpenNi/Freenect}
+\subsection{Arrancar driver OpenNi/Freenect}
 ROS esta compuesto por muchas librerías, OpenCV por su puesto está integrada y su principal uso es para procesar imágenes. El stack de ros se llama vision\_opencv, incluye la librería completa de OpenCV y la interface para conectarse con ROS.
 
 Principales paquetes que nos aporta vision\_opencv:
@@ -351,7 +351,7 @@ En la siguiente imagen describimos como se conectan los diferentes elementos ent
 \end{figure}
 
 
-\subsubsection{Crear paquete de ROS}
+\subsection{Crear paquete de ROS}
 
 Con el siguiente comando creo un paquete para mi código:
 
@@ -370,7 +370,7 @@ Una vez creado el paquete creamos el siguiente arbol de carpetas:
 
 En verde podemos ver el fichero donde vamos a guardar el código que utilizamos para nuestro nodo de OpenCV.
  
-\subsubsection{Código para mostrar imágenes}
+\subsection{Código para mostrar imágenes}
 
 Vamos a empezar con el código que nos va a mostrar las imágenes:
 
@@ -574,7 +574,7 @@ Cuando ya tenemos nuestro software instalado y preparado para usarse, vamos a pr
 \item Hacemos clic en el boton compilar, y si todo va bien veremos en la parte inferior un mensaje del compilador indicando el tamaño del codigo.
 \item Presionamos el boton subir y si todo va bien veremos en la consola inferior el mesaje de \textit{Succes}.
 \item Disfrutar del nuevo código añadido a la placa.
-\end{enumerate}c
+\end{enumerate}
 
 Tras estos test, sabemos que nuestra placa funciona, es reconocida por el ordenador y que podemos subir nuevo código.
 
@@ -720,7 +720,7 @@ long microsecndsToCentimeters(long microseconds)
 
 \end{lstlisting}
 
-\subsection{Conectando Tiva C con LaunchPad with Python}
+\subsection{Conectando Tiva C con LaunchPad with Python} \label{sec:ultrasonidos-python}
 
 Primero vamos a instalar PySerial. Es un modulo para conectar nuestro Launchpad a python. En internet existe un monton de documentación a respecto.
 
@@ -730,7 +730,7 @@ Nosotros estamos con Ubuntu y tenemos el paquete oficial que puede ser fácilment
 sudo apt-get install python-serial
 \end{listing}
 
-A continuación mostramos el código y podemos comprobar como funciona:
+A continuación mostramos el código y podemos comprobar como funciona. Creamos un fichero read\_sensor.py y pegamos el código que dejamos a continuación. 
 
 \begin{lstlisting}[style=Python]
  #!/usr/bin/env python
@@ -738,16 +738,13 @@ A continuación mostramos el código y podemos comprobar como funciona:
 import serial
 import sys
 
-
 try:
 	ser = serial.Serial('/dev/ttyACM0',115200)
 	
-
 except:
 	print "Unable to open serial port"
 
 while True:
-
 	try:
 		line = ser.readline()
 		print line
@@ -758,8 +755,40 @@ while True:
 
 \end{lstlisting}
 
+El siguiente paso es hacer que el fichero sea ejecutable y arrancarlo.
 
-\section{IMU Sensor MAgnetico Inercial}
+\begin{listing}[style=consola, numbers=none]
+   sudo chmod +X read_sensor.py
+  ./read_sensor
+\end{listing}
+
+
+\section{IMU Sensor Magnético Inercial}
+Un sensor magnético inercial (IMU) es un sensor electronico que mide velocidades, orientación y fuerzas gravitacionales usando una combinación de acelerómetros, giroscopios y magnetómetros. Estos sensores son muy utilizados en navegacion de robots o UAVs.
+
+Los IMUs nos aportan la aceleracion y la orientacion de un espacio iniercial, si conoces la posicion, velocidad y orientacion iniciales, tu puesdes calcular las velocidad integrando la aceleracion medida por el sonsor y la segunda integracion te dará la posicion. Para obtener la direccion correcta del robot, la orientación del robot es requerida. Esto puede ser obtenido integrando la velocidad angular del giroscopio.
+
+\begin{figure}[H]
+		\includegraphics[scale=0.3]{imagenes/IMU_Odometry.png}
+		\label{fig:5}
+		\centering
+		\caption{Conexion IMU a Tiva C Launchpad}
+\end{figure}
+
+Los valores que obtenemos del IMU, los convertimos en informacion de navegacion usando las equaciones de navegacion y alimentando las estimacines del filtro de kalman.
+El filtro de kalman es un algoritmo que estima el estado del sistema desde la lecturas tomadas. Los datos del systema de Navegacion inercial(INS) tendran algun desvio debido al error del acelerometro y del giroscopio. Para limitar este desvio, un INS es normalmente añadido por otros sensores que aportan la medida directa de los valores integrados. Basados en las medidas y en los modelos de error, el filtro de Kalman estima errores en las equaciones de navegacion y en el resto de sensores. En el siguiente figura mostramos un diagrama de una sistema de navegacion inercial usando un filtro de Kalman:
+
+\begin{figure}[H]
+		\includegraphics[scale=0.3]{imagenes/IMU_Kalman.png}
+		\label{fig:5}
+		\centering
+		\caption{Conexion IMU a Tiva C Launchpad}
+\end{figure}
+
+Conjuntamente con los encoders de los motores, el valor del IMU puede ser tomado como el valor del encoder y puede ser usado para la estimación de la posocion, que será el proceso de encontrar la posicion actual de un objeto en movimiento usando la posición determinista anterior.
+
+\subsection{Conectando IMU a Tiva C Launchpad}
+Mostramos el esquema de como debemos de conectar el sensor a nuestra placa.
 
 \begin{figure}[h!]
 		\includegraphics[scale=0.05]{imagenes/TIVA-MPU.JPG}
@@ -768,60 +797,110 @@ while True:
 		\caption{Conexion IMU a Tiva C Launchpad}
 \end{figure}
 
-A continuación vamos a comprobar como funciona nuestro IMU. Lo primero que vamos a hacer es mostrar el esquema de como debemos de conectar el sensor a nuestra placa.
+\subsection{Instalando librerias para Energia}
+A continuación necesitamos añadir las librerías para poder compilar el proyecto. Las librerias las podeis encontrar en mis repositorios del github  \url{https://github.com/m-sanchez-rico/tiva_code/tree/master/Libraries}. Para añadir las librerías, abrimos energía y vamos a programa - Incluir librería - Añadir Libreria ZIP.
 
-\begin{figure}[h!]
-		\includegraphics[scale=0.3]{imagenes/energia_library.jpg}
+\begin{figure}[H]
+		\includegraphics[scale=0.3]{imagenes/energia_library.png}
 		\label{fig:5}
 		\centering
 		\caption{Energia añadiendo librerías}
 \end{figure}
 
-A continuación necesitamos añadir las librerías para poder compilar el proyecto. Las librerias las podeis encontrar en mis repositorios del github  \url{https://github.com/m-sanchez-rico/tiva_code/tree/master/Libraries}. Para añadir las librerías, abrimos energia y vamos a programa - Incluir libreria - Añadir Libreria ZIP.
 
-A continuación, copiamos el código y compilamos y pasamos a la placa. Primero comprobaremos con el monitor serie del energia. Y segundo comprobaremos ejecutando el código del pyserial que esta en la carpeta interface. Para ver la lectura en ros solo tenemos que ejecutar el script como hicimos en el caso del ultrasonido.
+\subsection{Código de Ejemplo para IMU}
+Es esta sección os muestro un código ejemplo para probar que nuestro sensor funciona correctamente. 
 
+\begin{lstlisting}[style=Python]
+/* Service robot code, sensor only version
 
+*/
+//MPU 6050 Interfacing libraries
+
+#include <Wire.h>
+
+#include "I2Cdev.h"
+#include "MPU6050.h"
+
+MPU6050 accelgyro();
+
+void setup()
+{
+  
+  //Init Serial port with 115200 buad rate
+  Serial.begin(115200);  
+  Setup_MPU6050();
+}
+
+void Setup_MPU6050()
+{
+   Wire.begin(3);
+   Wire.setModule(3);
+   Wire.begin();
+  
+      // initialize device
+    Serial.println("Initializing I2C devices...");
+    accelgyro.initialize();
+    Serial.print(" hello mate \n");
+    // verify connection
+    Serial.println("Testing device connections...");
+    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
+    Serial.print(" hello mate again \n");
+}
+
+void loop()
+{
+
+   //Update MPU 6050
+    Update_MPU6050();
+ 
+}
+
+void Update_MPU6050()
+{
+  
+  int16_t ax, ay, az;
+  int16_t gx, gy, gz;
+
+      // read raw accel/gyro measurements from device
+    accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+    // display tab-separated accel/gyro x/y/z values
+    Serial.print("i");Serial.print("\t");
+    Serial.print(ax); Serial.print("\t");
+    Serial.print(ay); Serial.print("\t");
+    Serial.print(az); Serial.print("\t");
+    Serial.print(gx); Serial.print("\t");
+    Serial.print(gy); Serial.print("\t");
+    Serial.println(gz);
+    Serial.print("\n");
+
+}
+\end{lstlisting}
+
+Copiamos el código en energía, compilamos y pasamos a la placa. Para comprobar que todo esta correcto, el compilador de la placa nos tiene que mostrar el mensaje de success y running.
+
+Para seguir comprobando que nuestra sensor, las conexiones realizadas y la placa están funcionando correctamente vamos a abrir el monitor serial. Deberíamos ver la lectura del sensor como os muestro a continuación.
+
+%%%%% ------->>>> Imagen del monitor serial de energia con el IMU corriendo.   <<<<<<<<<<<<--------------%%%%%%%
+
+Y segundo comprobaremos ejecutando el código del pyserial que esta en la carpeta interface. Para ver la lectura en ros solo tenemos que ejecutar el script como hicimos en el caso del ultrasonido.
+
+\subsection{Conectando IMU y TIVA C LaunchPad con Python}
+Como hicimos con los sensores ultrasonidos. Vamos a ejecutar el escript que hicimos en el capitulo \ref{sec:ultrasonidos-python}, Nos vale el mismo codigo y solo tenemos que ir a la ruta donde lo tenemos guardado y ejectar el ecript con el siguiente comando:
+
+\begin{listing}[style=consola, numbers=none]
+  ./read_sensor.py
+\end{listing}
+
+Lo mismo que podemos ver en el \textit{monitor serial} de energía podemos ver en la consola. Ademas también sera el mismas lecturas que podremos ver desde ROS.
 
 
 
 
 \clearpage\null\newpage
 %%%% FICHERO ANTERIOR %%%%%%%
-\section{Estudio previo, control de fuerzas en robots manipuladores}
 
-Hola, Hola, etc.
-
-\section{Métodos clásicos de control de interacción}
-
-Los métodos clásicos de control se pueden dividir en:
-
-\begin{itemize}
-	\item \textbf{Métodos pasivos:} Robot y el medio (se controlan y limitan las fuerzas en juego). 
-
-	\item \textbf{Métodos activos:} Robot al contactar con el medio.
-\end{itemize}
-
-Ambos métodos persiguen exactamente las mismas metas.
-
-
-\subsection{Métodos de Control Pasivos}
-
-Se suelen utilizar para obtener baja impedancia mecánica. 
-
-Con el uso de \textit{actuadores neumáticos}. 
-
-Los \textit{actuadores de serie elásticas}.
-
-Los actuadores mencionados anteriormente.
-
-\subsection{Métodos de control activos}
-
-Control directo y control indirecto. 
-
-Los métodos de \textit{control directo} requieren...
-
-Los conocidos como métodos de \textit{control indirectos,} se basan en...
 
 \chapter{Ejemplo de estimador de contacto}
 
